@@ -1,0 +1,132 @@
+---
+title: "Week1 Home Work"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r, echo=FALSE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. 
+
+"forloop_factorial"
+
+```{r}
+num <- as.numeric(readline('Enter number for calculating factorial: '))
+num
+typeof(num) 
+```
+
+
+
+```{r}
+factorial <- num
+factorial
+typeof(factorial)
+```
+
+```{r}
+for (x in num:3) {
+  print(x)
+  x <- x-1
+  factorial <- factorial*x
+}
+print(factorial)
+```
+Applying While loop for factorial:
+```{r}
+num <- as.numeric(readline('Enter number for calculating factorial: '))
+num
+typeof(num)
+```
+```{r}
+factorial <- num
+factorial
+typeof(factorial)
+```
+
+```{r}
+n <- 1
+x <- num
+typeof(x)
+```
+
+```{r}
+while (n < num) {
+  x <- x-1
+  factorial <- (x*factorial)
+   # print(factorial)
+  n <- n+1
+}
+print(factorial)
+```
+```{r}
+
+```
+Number Sequence:
+```{r}
+first_num <- as.numeric(readline('Enter the first number for calculating sequence: '))
+first_num
+typeof(first_num)
+```
+
+```{r}
+last_num <- as.numeric(readline('Enter the second number for calculating sequence: '))
+last_num
+typeof(last_num)
+```
+
+```{r}
+i <- 1
+numeric_vector <- vector()
+while (first_num <= last_num) {
+  numeric_vector[i] <- c(first_num)
+  first_num = first_num + 5
+  i <- i+1
+}
+print(numeric_vector)
+```
+
+```{r}
+
+```
+Funtion_Lines:
+```{r}
+x1 <- as.numeric(readline('Enter the value of x1: '))
+y1 <- as.numeric(readline('Enter the value of y1: '))
+typeof(x1)
+```
+
+```{r}
+x2 <- as.numeric(readline('Enter the value of x2: '))
+y2 <- as.numeric(readline('Enter the value of y2: '))
+typeof(y1)
+```
+
+```{r}
+x <- (x2-x1)
+y <- (y2-y1)
+```
+
+```{r}
+slope_intercept <- function(x,y){
+  distance <- sqrt((x2-x1)^2+(y2-y1)^2)
+  slope <- (y/x)
+  y_intercept <- (y-x*slope)
+  print(distance)
+  print(slope)
+  print(y_intercept)
+}
+```
+
+```{r}
+slope_intercept(x,y)
+```
+
