@@ -16,7 +16,127 @@ library(tidyverse)
 ```
 
 ```{r}
-Students_score_csv <- read_csv(CASchool.csv)
+Students_score_csv <- read_csv("CASchools.csv")
+```
+
+```{r}
+head(Students_score_csv)
+```
+# Slicing specific rows
+```{r}
+slice(Students_score_csv, 1:10)
+```
+# Calculating the number of rows
+```{r}
+nrow(Students_score_csv)
+
+```
+# Slicing specific rows
+```{r}
+slice(Students_score_csv, 5)
+```
+# Slicing specific rows
+```{r}
+slice(Students_score_csv, 1, 5)
+```
+# Selecting specific columns
+```{r}
+select(Students_score_csv, district, grades, students)
+```
+# Applying filter on specific conditions
+```{r}
+filter(Students_score_csv, district == 75119)
+```
+# Applying filter on specific conditions
+```{r}
+filter(Students_score_csv, (grades == 'KK-06' & students > 100))
+```
+# Summarizing the dataset
+```{r}
+summary(Students_score_csv)
+```
+# Creating new column from the table
+```{r}
+total_score <- mutate(Students_score_csv, english*math*read)
+total_score
+```
+# Creating new column 'total_score' from the table
+```{r}
+total_score2 <- mutate(Students_score_csv, total_score=(english*math*read))
+total_score2
+```
+# Summarizing and getting mean of 'income'
+```{r}
+summarize(Students_score_csv, mean(income), median(expenditure))
+```
+
+```{r}
+
+
+```
+# Applying group_by funtion
+```{r}
+school_group <- group_by(Students_score_csv, school)
+school_group
+```
+# Applying different summarizing function
+```{r}
+summarize(school_group, mean(english), sum(read))
+```
+# Group by multiple column
+```{r}
+county <- group_by(Students_score_csv, county, school, students)
+summarize(county)
+```
+
+```{r}
+count(Students_score_csv, county)
+```
+# A list of all schools
+```{r}
+unique(Students_score_csv$school)
+```
+# Calculating the total count of schools
+```{r}
+school_count <- unique(Students_score_csv$school)
+paste("There are", length(school_count), "schools")
+```
+# Subsetting of a dataframe  is done by 
+```{r}
+School_subset <- Students_score_csv[1:10, 11:14]
+School_subset
+```
+```{r}
+head(School_subset)
+```
+
+
+```{r}
+
+```
+# Assigning new column names
+```{r}
+colnames(School_subset)[colnames(School_subset) == 'english'] <- 'Average english score'
+```
+
+```{r}
+colnames(School_subset)[colnames(School_subset) == 'read'] <- 'Average read score'
+```
+
+```{r}
+head(School_subset)
+```
+
+```{r}
+summarize(School_subset, mean(income), median(expenditure))
+```
+# Number of datapoints reduces and that reduces the mean and median
+```{r}
+summarize(Students_score_csv, mean(income), median(expenditure))
+```
+
+```{r}
+head(School_subset)
 ```
 
 
