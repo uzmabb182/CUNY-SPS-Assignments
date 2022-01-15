@@ -139,6 +139,56 @@ summarize(Students_score_csv, mean(income), median(expenditure))
 head(School_subset)
 ```
 
+```{r}
+Students_score_csv
+```
+```{r}
+data1[data1 == "A"] <- "XXX"
+```
+# Replace county values with abbreviation
+```{r}
+Students_score <- Students_score_csv
+print(Students_score)
+```
+
+```{r}
+Students_score[Students_score=="Alameda"] <- "A"
+print(Students_score)
+```
+
+```{r}
+Students_score[Students_score=="Butte"] <- "B"
+print(Students_score)
+```
+
+```{r}
+Students_score[Students_score=="Fresno"] <- "F"
+print(Students_score)
+```
+To see the results of change value
+```{r}
+slice(Students_score, 1:9)
+```
+# Reading CSV fro Github
+```{r}
+
+x <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/MQari_R_Bridge_Week2/CASchools.csv")
+
+```
+
+```{r}
+head(x)
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
 
 
 ## R Markdown
