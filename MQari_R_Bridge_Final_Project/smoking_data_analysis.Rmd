@@ -11,13 +11,34 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, echo=FALSE}
 knitr::opts_chunk$set(error = TRUE)
 ```
+# Import the library for reading and manipulating the data
+```{r}
+library(tidyverse)
+```
+# Objective for Analysis: 
+* Relationship between gender and rate of smoking.
+* Relationship between education and rate of smoking.
 
+## Reading smoking.csv from Github
 ```{r}
 smoking_data <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/MQari_R_Bridge_Final_Project/smoking.csv")
 ```
+## Data Exploration:
+```{r}
+head(smoking_data)
+```
 
 ```{r}
-https://github.com/uzmabb182/CUNY-SPS-Assignments/raw/main/MQari_R_Bridge_Final_Project/smoking.csv
+nrow(smoking_data)
+```
+## # Summarizing the dataset
+```{r}
+summary(smoking_data)
+```
+# Data Wrangling:
+
+```{r}
+
 ```
 
 ## R Markdown
