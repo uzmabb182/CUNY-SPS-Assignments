@@ -218,7 +218,10 @@ ggplot(smoking_data, aes(x = gross_income_upper_range, y = smoke_amt_total, fill
 * The spread of data is highest among the highest gross income class and the since the mean is greater than median, the data is right skewed.
 
 ```{r}
+p1 <- ggplot(smoking_data, aes(x = age)) +
+  geom_histogram()
 
+p1
 ```
 
 ## R Markdown
