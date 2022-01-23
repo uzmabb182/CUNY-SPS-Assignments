@@ -56,12 +56,12 @@ CREATE TABLE room_assignment (
 ALTER TABLE group_assignment ADD CONSTRAINT fk_group_assignment_group_id FOREIGN KEY(group_id)
 REFERENCES key_groups (group_id);
 
-ALTER TABLE `group_assignment` ADD CONSTRAINT `fk_group_assignment_user_id` FOREIGN KEY(`user_id`)
-REFERENCES `users` (`user_id`);
+ALTER TABLE group_assignment ADD CONSTRAINT fk_group_assignment_user_id FOREIGN KEY(user_id)
+REFERENCES users (user_id);
 
-ALTER TABLE `room_assignment` ADD CONSTRAINT `fk_room_assignment_room_id` FOREIGN KEY(`room_id`)
-REFERENCES `rooms` (`room_id`);
+ALTER TABLE room_assignment ADD CONSTRAINT fk_room_assignment_room_id FOREIGN KEY(room_id)
+REFERENCES rooms (room_id);
 
-ALTER TABLE `room_assignment` ADD CONSTRAINT `fk_room_assignment_group_id` FOREIGN KEY(`group_id`)
-REFERENCES `key_groups` (`group_id`);
+ALTER TABLE room_assignment ADD CONSTRAINT fk_room_assignment_group_id FOREIGN KEY(group_id)
+REFERENCES key_groups (group_id);
 
