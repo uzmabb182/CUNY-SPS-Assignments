@@ -27,6 +27,7 @@ smoking_data <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-A
 ```{r}
 head(smoking_data)
 ```
+## To calculate the number of rows
 
 ```{r}
 nrow(smoking_data)
@@ -35,7 +36,186 @@ nrow(smoking_data)
 ```{r}
 summary(smoking_data)
 ```
+## Statistical Calculations:
+## Finding the first quartile
+```{r}
+quantile(smoking_data$age, 0.25)
+```
+
+```{r}
+quantile(smoking_data$age, 0.50)
+```
+
+```{r}
+quantile(smoking_data$age, 0.75)
+```
+
+```{r}
+mean <- mean(smoking_data$age) 
+mean
+```
+
+```{r}
+median <- median(smoking_data$age) 
+median
+```
+
 # Data Wrangling:
+
+## Select the rows using slice
+```{r}
+slice(smoking_data, 1:7)
+```
+
+## Select the columns
+```{r}
+select(smoking_data, gender, age, smoke)
+```
+Select rows 1 and 7 using slice
+```{r}
+slice(smoking_data, c(1, 7, 4))
+```
+## Subsetting the dataset by column
+```{r}
+x <- c('age', 'gender', 'highest_qualification')
+x
+```
+## Subsetting the dataset by excluding the column assigned to 'x'
+```{r}
+select(smoking_data,-all_of(x))
+```
+
+```{r}
+
+```
+
+## Filter data using filter
+```{r}
+filter(smoking_data, marital_status=='Married')
+```
+
+## filter data by mutiple criteria
+```{r}
+filter(smoking_data, gender=='Male'& smoke=='Yes'& age > 20 )
+```
+## Creating a new column based on other column and assigning name to it
+```{r}
+smoking_data <- mutate(smoking_data, smoke_amt_total=(amt_weekends+amt_weekdays))
+smoking_data
+```
+## Display mean of a column using summarize
+```{r}
+summarize(smoking_data, mean(age))
+```
+## Group smoking_data by gender using group_by and then summarize
+```{r}
+gender <- group_by(smoking_data, gender)
+summarize(gender, mean(age), median(age))
+```
+## Group smoking_data by gender and by smoke using group_by and then summarize
+```{r}
+gender <- group_by(smoking_data, gender, smoke)
+summarize(gender, mean(age), median(age))
+```
+## Count the number of smoking_data per gender
+```{r}
+count(smoking_data, gender)
+```
+## Spitiing the values in a column
+```{r}
+head(smoking_data)
+
+```
+## Fetching unique values from a column
+
+```{r}
+education_category <- unique(smoking_data$highest_qualification)
+
+paste("The number of unique categories for education is : ", education_category)
+```
+## 
+```{r}
+length(education_category)
+
+```
+## To check the datatype of each column
+```{r}
+str(smoking_data)
+```
+## To split a column in a dataset and assigning new column names
+```{r}
+smoking_data[c('gross_income_lower_range', 'gross_income_upper_range')] <- str_split_fixed(smoking_data$gross_income, " ", 2)
+```
+
+```{r}
+head(smoking_data)
+```
+## Now removing the unwanted values from the splitted columns
+```{r}
+smoking_data$gross_income_upper_range  <- gsub('to', '', as.character(smoking_data$gross_income_upper_range))
+smoking_data
+```
+## Replacing the values in the new column
+```{r}
+smoking_data$gross_income_lower_range  <- sub("Under", "1,000", smoking_data$gross_income_lower_range)
+smoking_data
+```
+
+```{r}
+smoking_data$gross_income_lower_range  <- sub("Above", "5,000", smoking_data$gross_income_lower_range)
+smoking_data
+```
+## Graphical Analysis:
+```{r}
+library(ggplot2)
+my_graph <- ggplot(smoking_data, aes(x = gender, y = smoke_amt_total)) +
+    geom_point(aes(color = factor(smoke)))
+my_graph +
+    labs(
+        title = "Amount of Smoking on the Weekends per Gender "
+         )
+```
+
+```{r}
+new_graph<-ggplot(smoking_data, aes(x = log(age),
+                              y = log(smoke_amt_total))) +
+                    geom_point(aes(color = factor(smoke))) +
+                    stat_smooth(method = "lm",
+                                col = "#C42126",
+                    se = FALSE, size = 1)
+new_graph
+```
+
+```{r}
+ggplot(smoking_data, aes(x=gross_income_upper_range, y=smoke_amt_total)) + 
+  geom_bar(stat="identity", position = "dodge")+
+  scale_fill_brewer(palette = "Pastel2")
+```
+
+```{r}
+perf <-ggplot(data=smoking_data, aes(x=gross_income_upper_range, y=smoke_amt_total,fill=gross_income_upper_range))+
+  geom_bar(stat="identity")
+perf
+```
+
+```{r}
+perf <-ggplot(data=smoking_data, aes(x=highest_qualification, y=smoke_amt_total,fill=highest_qualification))+
+  geom_bar(stat="identity")
+perf
+```
+
+```{r}
+ggplot(smoking_data, aes(x = gross_income_upper_range, y = smoke_amt_total, fill = gross_income_upper_range)) + 
+  geom_boxplot() +
+  stat_summary(fun = "mean", geom = "point", shape = 8,
+               size = 2, color = "white")
+```
+# Brief Conclusion:
+* The amount of smoking on the weekends by male is slightly higher than the female.
+* There is a consistant slight increase increase in the amount of smoking by age.
+* The gropu with the gross income of around $10,000 tends to smoke the highest as compared to the others.
+* The 'no qualification' category is the highest group of smokers.
+* The spread of data is highest among the highest gross income class and the since the mean is greater than median, the data is right skewed.
 
 ```{r}
 
