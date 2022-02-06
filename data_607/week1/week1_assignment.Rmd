@@ -114,22 +114,23 @@ ggplot(drug_df, aes(x = age, y = cocaine_use, fill = cocaine_use)) +
     theme_classic()
 ```
 # Conclusion Analysis:
+
+### Alcohol_use is highest anong the age group of 22-23 
+### Alcohol_use Mean: 55.43%
+
+### Marijuana_use is highest among the age group of 18-20
+### Marijuana_use Mean: 18.92%
+
+
+### Heroin_use is highest anong the age group of 22-23
+### Heroin_use Mean: 0.3529%
+
+
+### Cocaine_use is highest anong the age group of 20-21
+### Cocaine_use  Mean: 0.2941%  
+
+### The boomers aged 50 to 64, have lower rates of drug use overall than their younger generations
 ```{r}
-# Alcohol_use is highest anong the age group of 22-23 
-#  Alcohol_use Mean: 55.43%
-
-# Marijuana_use is highest among the age group of 18-20
-# Marijuana_use Mean: 18.92%
-
-
-# Heroin_use is highest anong the age group of 22-23
-# Heroin_use Mean: 0.3529%
-
-
-# Cocaine_use is highest anong the age group of 20-21
-# Cocaine_use  Mean: 0.2941%  
-
-# The boomers aged 50 to 64, have lower rates of drug use overall than their younger generations
 summary(drug_df)
 ```
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
