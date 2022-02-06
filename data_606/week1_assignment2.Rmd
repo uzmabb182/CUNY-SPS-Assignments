@@ -1,0 +1,329 @@
+---
+title: "Week1 Assignment2 - Introduction to Data"
+output: html_document
+---
+
+# Load Packages:
+```{r}
+# Loading the data packages
+
+library(tidyverse)
+library(openintro)
+```
+# The Data:
+```{r}
+#  Load and view the nycflights data frame.
+data(nycflights)
+nycflights
+```
+
+```{r}
+# Viewing the column names
+
+colnames(nycflights)
+```
+
+```{r}
+?nycflights
+```
+
+```{r}
+# T o see the quick details of data
+glimpse(nycflights)
+
+```
+
+```{r}
+unique(nycflights$dest)
+```
+# How delayed were flights that were headed to Los Angeles?
+```{r}
+#select rows where flight destination is equal to 'Los Angeles'
+nycflights[nycflights$dest == 'LAX', ]
+
+```
+
+```{r}
+nycflights <- nycflights %>% mutate(month_name = month.name[month])
+nycflights
+```
+
+```{r}
+library(dplyr)
+```
+# How do departure delays vary by month?
+```{r}
+nycflights %>%
+  select (flight, dep_delay, month_name) %>%
+  arrange(desc(month_name))
+```
+
+```{r}
+ggplot(data = nycflights, aes(x = month_name, y = dep_delay)) + 
+  geom_point() +
+  geom_smooth(method=lm) # add linear trend line
+```
+
+# Which of the three major NYC airports has the best on time percentage for departing flights?
+```{r}
+# Selecting data for JFK airport
+JFK_airport <- nycflights %>%
+  select (flight, origin, dep_time, dep_delay, air_time) %>%
+ filter(origin =="JFK") 
+JFK_airport
+```
+```{r}
+# Calculating the percentage of delay for JFK
+JFK_percentage_delay <- (nrow(subset(JFK_airport, dep_delay > 0))/
+nrow(JFK_airport))*100
+
+JFK_percentage_delay
+```
+
+```{r}
+# Selecting data for LGA airport
+LGA_airport <- nycflights %>%
+  select (flight, origin, dep_time, dep_delay, air_time) %>%
+ filter(origin =="LGA")
+
+LGA_airport
+```
+
+```{r}
+# Calculating the percentage of delay for LGA
+LGA_percentage_delay <- (nrow(subset(LGA_airport, dep_delay > 0))/
+nrow(LGA_airport))*100
+
+LGA_percentage_delay
+```
+
+```{r}
+# Selecting data for EWR airport
+EWR_airport <- nycflights %>%
+  select (flight, origin, dep_time, dep_delay, air_time) %>%
+ filter(origin =="EWR")
+
+EWR_airport
+```
+
+```{r}
+# Calculating the percentage of delay for EWR
+EWR_percentage_delay <- (nrow(subset(EWR_airport, dep_delay > 0))/
+nrow(EWR_airport))*100
+
+EWR_percentage_delay
+```
+
+```{r}
+delay_percentage <- c(JFK_percentage_delay, LGA_percentage_delay, EWR_percentage_delay)
+delay_percentage
+```
+
+```{r}
+min(delay_percentage)
+```
+
+```{r}
+# LGA has the least percentage of delay; it means it is the best airport for on time percentage 
+# for departing flights
+```
+# Analysis:
+## Departure Delays:
+```{r}
+# the distribution of departure delays of all flights with a histogram.
+ggplot(data = nycflights, aes(x = dep_delay)) +
+  geom_histogram()
+```
+
+```{r}
+#  define the binwidth
+ggplot(data = nycflights, aes(x = dep_delay)) +
+  geom_histogram(binwidth = 15)
+```
+# Exercise 1:
+## Look carefully at these three histograms. How do they compare? 
+## Are features revealed in one that are obscured in another?
+```{r}
+# Increasing the binwidth, presents more detail of data but unnecessary larger bandwidth 
+# hides the changes in data. First histogram is the most balanced presenration
+ggplot(data = nycflights, aes(x = dep_delay)) +
+  geom_histogram(binwidth = 150)
+```
+
+```{r}
+#  to visualize only on delays of flights headed to Los Angeles
+LAX_flights <- nycflights %>% filter(dest == "LAX")
+
+ggplot(data = LAX_flights, aes(x = dep_delay)) +
+  geom_histogram()
+```
+
+```{r}
+# obtain numerical summaries for LA flights
+
+LAX_flights %>%
+  summarize(mean_LAX   = mean(dep_delay), 
+            median_LAX  = median(dep_delay), 
+            count       = n(),
+            stdev       = sd(dep_delay),
+            Inter_quart_range = IQR(dep_delay),
+            min_valve = min(dep_delay),
+            max_value = max(dep_delay))
+
+```
+# Exercise 2:
+## Create a new data frame that includes flights headed to SFO in February, 
+## and save this data frame as sfo_feb_flights. How many flights meet these criteria?
+```{r}
+# Selecting data for JFK airport
+SFO_airport <- nycflights %>%
+ filter(dest =="SFO", month == 2) 
+SFO_airport
+```
+
+```{r}
+# The count of flights that meet the criteria
+nrow(SFO_airport)
+```
+# Exercise 3:
+## Describe the distribution of the arrival delays of these flights using a histogram 
+## and appropriate summary statistics
+
+```{r}
+ggplot(data = SFO_airport, aes(x = arr_delay)) +
+  geom_histogram()
+```
+
+```{r}
+# obtain numerical summaries for SFO flights
+
+SFO_airport %>%
+  summarise(mean_SFO   = mean(arr_delay), 
+            median_SFO  = median(arr_delay), 
+            count       = n(),
+            stdev       = sd(arr_delay),
+            Inter_quart_range = IQR(arr_delay),
+            min_valve = min(arr_delay),
+            max_value = max(arr_delay))
+
+```
+# Exercise 4:
+## Calculate the median and interquartile range for arr_delays 
+## of flights in the sfo_airport data frame, grouped by carrier. 
+## Which carrier has the most variable arrival delays?
+```{r}
+# The UA and DL carriers has the most variable arrival delays because the IQR is the widest spread range
+SFO_airport %>%
+  group_by(carrier) %>%
+  summarise(median_sfo = median(arr_delay),
+            Inter_quart_range = IQR(arr_delay),
+            count = n()) %>%
+  arrange(desc(count))
+```
+# Departure Delays by Month:
+## Which month would you expect to have the highest average delay departing from an NYC airport?
+
+```{r}
+# The flights group by month shows that July is the highest average delay departing from an NYC airport
+
+nycflights %>%
+  group_by(month) %>%
+  summarise(mean_nyc = mean(dep_delay),
+            median_nyc = median(dep_delay)) %>%
+  arrange(desc(mean_nyc))
+  
+```
+# Exercise 5:
+## Suppose you really dislike departure delays and you want to schedule your travel in a month that minimizes your ## potential departure delay leaving NYC. One option is to choose the month with the lowest mean departure delay. ## Another option is to choose the month with the lowest median departure delay. 
+## What are the pros and cons of  these two choices?
+
+```{r}
+# pros and cons: Mean values sometimes get effected by the outliers and resulted in a wrong judgement
+# So its better to consider median value
+```
+# On Time Departure rate for NYC Airports:
+## flying out of NYC and want to know which of the three major NYC airports has the best on time 
+## departure rate of departing flights
+```{r}
+# classifying each flight as “on time” or “delayed” by creating a new variable with the mutate function.
+nycflights <- nycflights %>%
+  mutate(dep_type = ifelse(dep_delay < 5, "on time", "delayed"))
+
+nycflights
+```
+
+```{r}
+# We can now find best on time rate NYC airport  
+
+nycflights %>%
+  group_by(origin) %>%
+  summarise(dep_rate = sum(dep_type == "on time") / n()) %>%
+  arrange(desc(dep_rate))
+```
+# Exercise 6:
+## If you were selecting an airport simply based on on time departure percentage, 
+## which NYC airport would you choose to fly out of?
+
+```{r}
+# We can now visualize the results above and conclude that LGA has the best departure percentage
+
+ggplot(data = nycflights, aes(x = origin, fill = dep_type)) +
+  geom_bar()
+```
+# More Practice:
+# Exercise 7:
+## Mutate the data frame so that it includes a new variable that contains the average speed, 
+## avg_speed traveled by the plane for each flight (in mph)
+```{r}
+nycflights <- nycflights %>%
+  mutate(avg_speed = distance / (air_time / 60))
+
+nycflights
+```
+# Exercise 8:
+# Make a scatterplot of avg_speed vs. distance. Describe the relationship between average speed and distance. 
+```{r}
+ggplot(data = nycflights, aes(x = distance, y = avg_speed, color= carrier)) + 
+  geom_point() +
+  geom_smooth(method=lm) # add linear trend line
+```
+# Exercise 9:
+## Replicate the following plot
+```{r}
+filtered_carrier <- nycflights %>%
+  filter(carrier == "AA" | carrier == "DL" | carrier == "UA")
+# Now draw the plot
+ggplot(data = filtered_carrier, aes(x = dep_delay, y = arr_delay, color= carrier)) + geom_point()
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

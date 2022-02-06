@@ -1,0 +1,198 @@
+---
+title: "Week1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+```{r}
+library(tidyverse)
+```
+
+```{r}
+library(openintro)
+```
+# Assignment 1:
+## Data for present day birth records in the United States
+```{r}
+data('present', package='openintro')
+```
+
+```{r}
+present
+```
+
+```{r}
+glimpse(present)
+```
+# Some Exploration:
+## To access the data in a single column
+```{r}
+present$boys
+```
+#Exercise 1: to extract just the counts of girls birth record in US
+```{r}
+count(present, "girls")
+```
+## Below is the vector prsentation of count
+```{r}
+present$girls
+```
+# Data Visualization:
+## simple scatter plot of the number of girls birth record per year using ggplot
+```{r}
+ggplot(data = present, aes(x = year, y = girls)) + 
+  geom_point()
+```
+## simple line plot of the number of girls birth record per year in US using ggplot
+```{r}
+ggplot(data = present, aes(x = year, y = girls)) + 
+  geom_line()
+```
+## Exercise 2: From 1940 to 1960 there is increase in the number of girls born per year. 
+## Then from 1980 to 2000 there is a increase in the number of girls born per year.
+```{r}
+present$boys + present$girls
+```
+## Adding a new variable to the dataframe
+```{r}
+present <- present %>%
+  mutate(total = boys + girls)
+present
+```
+## Exercise 3: To generate a plot of the proportion of boys born over time
+
+```{r}
+present <- present %>%
+  mutate(boy_ratio = boys/total)
+present
+```
+## Analysis: You can see below that there is a consistant fall pattern of boys birth ratio per year
+```{r}
+ggplot(data = present, aes(x = year, y = boy_ratio)) + 
+  geom_line()
+```
+
+```{r}
+ggplot(data = present, aes(x = year, y = boy_ratio)) + 
+  geom_point() +
+  geom_smooth(method=lm) # add linear trend line
+  
+```
+
+```{r}
+# boys birth ratio per year is a downward slope from 1940 to 2000
+```
+
+```{r}
+present <- present %>%
+  mutate(boy_to_girl_ratio = boys / girls)
+present
+```
+## To see the boolean output if the boys are more than girls
+```{r}
+present <- present %>%
+  mutate(more_boys = boys > girls)
+present
+```
+
+```{r}
+present %>%
+  summarize(min = min(boys), max = max(boys))
+```
+# Exercise 4:
+## What years are included in this data set? 
+```{r}
+present$year
+```
+# Exercise 4:
+## How to get dimensions of a dataframe
+```{r}
+glimpse(present)
+```
+
+```{r}
+dim(present)
+```
+# Exercise 4:
+## What are the variable (column) names?
+```{r}
+colnames(present)
+```
+# Exercise 5:
+## How do these counts compare to Arbuthnot’s? Are they of a similar magnitude?
+## As you can see there is amajor difference in the magnitude of means
+```{r}
+# arbuthnot data mean is:
+mean(arbuthnot$boys + arbuthnot$girls)
+```
+
+```{r}
+# present data mean is:
+mean(present$boys + present$girls)
+```
+# Exercise 6
+# Make a plot that displays the proportion of boys born over time. What do you see? 
+# Does Arbuthnot’s observation about boys being born in greater proportion 
+# than girls hold up in the U.S.? 
+# Include the plot in your response
+```{r}
+present <- present %>%
+  mutate(girl_ratio = girls/total)
+present
+```
+
+```{r}
+ggplot(data = present, aes(x = year, y = girl_ratio)) + 
+  geom_point() +
+  geom_smooth(method=lm) # add linear trend line
+```
+
+```{r}
+# Analysis: you can see that the girls birth ratio increases from 1940 to 2000
+# Whereas the boys birth ratio is decreasing from 1940 to 2000
+```
+# Exercise 7:
+## In what year did we see the most total number of births in the U.S.? 
+## Hint: First calculate the totals and save it as a new variable. 
+```{r}
+present <- present %>%
+  mutate(total = boys + girls)
+present
+```
+
+```{r}
+total_desc <- present %>%
+  arrange(desc(total))
+total_desc
+```
+
+```{r}
+ggplot(data = present, aes(x = year, y = total)) + 
+  geom_line()
+```
+
+```{r}
+# 1960 is the year where you can see the most total number of births in the U.S.
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
