@@ -24,29 +24,112 @@ You can also embed plots, for example:
 ```{r pressure, echo=FALSE}
 plot(pressure)
 ```
+# Introduction:
+##Title: How Baby Boomers Get High
+### This dataset covers the story behind "How Baby Boomers Get High" and it covers 13 drugs across 17 age groups.
+### It holds the records of percentage of those in age group who used these 13 drugs in the last 12 months.
+### It holds the records of median number of times a user in an age group uses these drugs in the last 12 months.
+### Link to access article: https://fivethirtyeight.com/features/how-baby-boomers-get-high/
+# Load Libraries:
+```{r}
+library(tidyverse)
+library(dplyr)
+```
+# Import CSV Data from Github:
+```{r}
+drug_df <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week1/drug-use-by-age.csv")
+```
 
 ```{r}
+drug_df
+```
+# gsub() funtion searches for the charater to replace in the column names
+```{r}
+names(drug_df) <- gsub("-", "_", names(drug_df))
+drug_df
+```
+# EDA: Fetching column names
+```{r}
+colnames(drug_df) 
+```
+# Rename a single column name
+```{r}
+names(drug_df)[2] <- "sample_size"
+str(drug_df)
+```
+#Identifying and subseting the columns to replace the value
+```{r}
+drug_df[ ,7:27 ][drug_df[ ,7:27] == '-'] <- '0'
+drug_df
+```
+# Checking the data for value changes
+```{r}
+head(drug_df)
+```
+# Subset by column and row:
+## # Selecting an age group with 50% or more use of alcohol
+```{r}
+high_alcohol_use <- drug_df %>%                             # Using dplyr functions
+  select(age, sample_size, alcohol_use, alcohol_frequency) %>% 
+  filter(alcohol_use >= 50)
+high_alcohol_use    
 
 ```
 
 ```{r}
-
+summary(high_alcohol_use)
 ```
 
 ```{r}
-
+ggplot(high_alcohol_use, aes(x = age, y = alcohol_use, fill = alcohol_use)) +
+    geom_bar(stat = "identity") +
+    coord_flip() +
+    theme_classic()
 ```
 
 ```{r}
-
+ggplot(data = drug_df, aes(x = age, y = marijuana_use, color= marijuana_use)) + 
+  geom_point() +
+  labs(title = "Percentage of Marijuana Use by Age in past 12 Months")
+  geom_smooth(method=lm) # add linear trend line
+```
+# Selection Using Subset function:
+```{r}
+# using subset function
+heroin_data <- subset(drug_df, age >= 20,
+select=c(age, heroin_use, heroin_frequency))
+heroin_data
+```
+# Visual presentation
+```{r}
+ggplot(data = heroin_data, aes(x = age, y = heroin_use, color= heroin_use)) + 
+  geom_point() +
+  geom_smooth(method=lm) # add linear trend line
 ```
 
 ```{r}
-
+ggplot(drug_df, aes(x = age, y = cocaine_use, fill = cocaine_use)) +
+    geom_bar(stat = "identity") +
+    coord_flip() +
+    theme_classic()
 ```
-
+# Conclusion Analysis:
 ```{r}
+# Alcohol_use is highest anong the age group of 22-23 
+#  Alcohol_use Mean: 55.43%
 
+# Marijuana_use is highest among the age group of 18-20
+# Marijuana_use Mean: 18.92%
+
+
+# Heroin_use is highest anong the age group of 22-23
+# Heroin_use Mean: 0.3529%
+
+
+# Cocaine_use is highest anong the age group of 20-21
+# Cocaine_use  Mean: 0.2941%  
+
+# The boomers aged 50 to 64, have lower rates of drug use overall than their younger generations
+summary(drug_df)
 ```
-
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
