@@ -35,7 +35,7 @@ con <- DBI::dbConnect(odbc::odbc(),
                      Driver = "PostgreSQL Unicode",
                      Database = "tbdata_db",
                      UserName = "postgres",
-                     Password = "Learning123*",
+                     Password = "",
                      Servername = "localhost",
                      Port = 5432)
 ```
