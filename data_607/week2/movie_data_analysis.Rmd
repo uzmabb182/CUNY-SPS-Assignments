@@ -1,5 +1,5 @@
 ---
-title: "week2 Assignment - R and SQL"
+title: "Movie Assignment - SQL and R"
 output: html_document
 ---
 
@@ -18,22 +18,19 @@ library(odbc)
 sort(unique(odbcListDrivers()[[1]]))
 ```
 
+
 ```{r}
 library(DBI)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
 ```{r}
 library(RODBC)
 ```
-# Creating the connection to the PostgreSQL
+
 ```{r}
 con <- DBI::dbConnect(odbc::odbc(),
                      Driver = "PostgreSQL Unicode",
-                     Database = "tbdata_db",
+                     Database = "movies_db",
                      UserName = "postgres",
                      Password = "",
                      Servername = "localhost",
@@ -43,18 +40,43 @@ con <- DBI::dbConnect(odbc::odbc(),
 ```{r}
 con
 ```
-# Fetching data from PostgreSQL
+
 ```{r}
-tb_df = dbGetQuery(con, "SELECT * FROM tb")
-tb_df
+movie_df = dbGetQuery(con, "SELECT * FROM movie")
+movie_df
 ```
 
 ```{r}
-summary(tb_df)
+movie_df = dbGetQuery(con, "SELECT * FROM movie")
+movie_df
 ```
 
 ```{r}
-str(tb_df)
+rating_df = dbGetQuery(con, "SELECT * FROM rating")
+rating_df
+```
+
+```{r}
+site_df = dbGetQuery(con, "SELECT * FROM site")
+site_df
+```
+
+```{r}
+consumer_df = dbGetQuery(con, "SELECT * FROM consumer")
+consumer_df
+```
+
+```{r}
+movie_site_df = dbGetQuery(con, "SELECT * FROM site_movie")
+movie_site_df
+```
+
+```{r}
+
+```
+
+```{r}
+
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
