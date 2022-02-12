@@ -72,7 +72,8 @@ movie_site_df
 ```
 
 ```{r}
-
+library(tidyverse)
+library(dplyr)
 ```
 
 ```{r}

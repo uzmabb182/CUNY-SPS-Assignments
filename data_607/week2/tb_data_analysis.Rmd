@@ -57,4 +57,17 @@ summary(tb_df)
 str(tb_df)
 ```
 
+```{r}
+library(tidyverse)
+library(dplyr)
+```
+
+```{r}
+population_df <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week2/population.csv")
+```
+
+```{r}
+population_df
+```
+
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
