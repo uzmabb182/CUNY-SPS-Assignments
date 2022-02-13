@@ -132,4 +132,37 @@ ggplot(drug_df, aes(x = age, y = cocaine_use, fill = cocaine_use)) +
 ```{r}
 summary(drug_df)
 ```
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+library(reshape2)
+```
+
+# Multiple columns data by bar plot:
+```{r}
+# First filter the age group 50-64 and selecting the columns representing percentages(odd # columns)
+
+data_t <- drug_df %>% filter(age == "50-64") %>%
+
+  select(c(3,5,7,9,11,13,15,17,19,21,23,25,27))
+
+data_t
+```
+# Transform the table from wide form to long form
+```{r}
+data_t2 <- data_t %>%
+
+  pivot_longer(cols = c(1:13),
+
+               names_to = "Variable",
+
+               values_to = "Value")
+```
+
+```{r}
+p <- ggplot(data = data_t2, aes(x = Variable, y = Value)) +
+
+  geom_bar(stat = "identity") + coord_flip()
+
+p
+```
+
