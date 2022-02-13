@@ -42,8 +42,8 @@ con
 ```
 
 ```{r}
-movie_df = dbGetQuery(con, "SELECT * FROM movie")
-movie_df
+library(tidyverse)
+library(dplyr)
 ```
 
 ```{r}
@@ -70,10 +70,44 @@ consumer_df
 movie_site_df = dbGetQuery(con, "SELECT * FROM site_movie")
 movie_site_df
 ```
+# Handling missing data in PostgreSQL database
+```{r}
+# Handling missing data
+```
+# To view the datatype of all columns and observations
+```{r}
+str(rating_df)
+```
+# Some rating values are missing, indicated by a -1. We then 'clean' the table as follows:
+```{r}
+rating_df = dbGetQuery(con, "UPDATE rating SET rating = NULL WHERE rating = -1")
+
+```
 
 ```{r}
-library(tidyverse)
-library(dplyr)
+rating_df = dbGetQuery(con, "SELECT * FROM rating")
+rating_df
+```
+# Some 'number_of_views' values are missing in movie_site table, and indicated by a -1. We then 'clean' the table as follows:
+```{r}
+dbGetQuery(con, "UPDATE site_movie SET number_of_views = NULL WHERE number_of_views = -1")
+
+```
+
+```{r}
+movie_site_df = dbGetQuery(con, "SELECT * FROM site_movie")
+movie_site_df
+```
+#Replace all NA values with zero in movie_site_df
+```{r}
+
+movie_site_df <- movie_site_df %>% replace(is.na(.), 0)
+movie_site_df
+```
+#Replace all NA values with zero in movie_site_df
+```{r}
+rating_df <- rating_df %>% replace(is.na(.), 0)
+rating_df
 ```
 
 ```{r}

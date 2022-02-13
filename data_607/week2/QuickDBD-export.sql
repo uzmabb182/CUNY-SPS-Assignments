@@ -119,3 +119,8 @@ VALUES (6, 2, 6, -1);
 INSERT INTO site_movie
 VALUES (6, 4, 8, -1);
 
+SELECT COUNT(*), movie_class AS "total movie"
+FROM movie
+GROUP BY movie_class;
+
+
