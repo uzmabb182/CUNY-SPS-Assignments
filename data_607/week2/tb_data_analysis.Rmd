@@ -70,4 +70,59 @@ population_df <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-
 population_df
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+data_merge1 <- merge(tb_df, population_df, by = c("country", "year"))       # Applying merge() function
+data_merge1
+```
+```{r}
+data_merge1 <- data_merge1 %>%                               # Replacing values
+  mutate(child = replace(child, child == -1, 0))
+
+data_merge1
+```
+
+```{r}
+data_merge1 <- data_merge1 %>%                               # Replacing values
+  mutate(adult = replace(adult, adult == -1, 0))
+
+data_merge1
+```
+
+```{r}
+data_merge1 <- data_merge1 %>%                               # Replacing values
+  mutate(elderly = replace(elderly, elderly == -1, 0))
+
+data_merge1
+```
+
+
+# create an R dataframe that shows rates of tuberculosis infection by country:
+# To solve this I am taking the most recent year population in data.
+```{r}
+
+data_merge1 <- data_merge1 %>% filter(year==2013) %>% mutate(sumrow= child + adult + elderly)
+
+data_merge1
+```
+# Grouping by population and adding the row values of male and female infections
+```{r}
+data_merge1 <- data_merge1 %>%
+        group_by(country) %>%
+        summarise(pop = mean(population), total_infection = sum(sumrow))
+
+data_merge1
+
+```
+# Now calculating the rate of infection by country and 0 means no data reported for that country
+```{r}
+data_merge1 <- data_merge1 %>% mutate(rate = (total_infection/pop)*100)
+   
+data_merge1  
+
+```
+
+```{r}
+
+```
+
+

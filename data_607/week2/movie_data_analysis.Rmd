@@ -111,7 +111,21 @@ rating_df
 ```
 
 ```{r}
+rating_count = dbGetQuery(con, "SELECT count(*) FROM rating")
+rating_count
+```
+
+```{r}
+rating_avg = dbGetQuery(con, "SELECT ROUND(AVG(rating), 2) FROM rating")
+rating_avg
+```
+
+```{r}
+class_df = dbGetQuery(con,"SELECT COUNT(*), movie_class FROM movie GROUP BY movie_class")
+class_df
+```
+
+```{r}
 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
