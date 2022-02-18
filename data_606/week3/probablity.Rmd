@@ -1,5 +1,5 @@
 ---
-title: "Probability - Week 2 Assignment"
+title: "Probability - Week 3 Assignment"
 output: html_document
 ---
 
