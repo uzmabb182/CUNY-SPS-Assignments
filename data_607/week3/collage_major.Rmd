@@ -27,22 +27,28 @@ collage_major
 ```
 # Code that identifies the majors that contain either "DATA" or "STATISTICS"
 ```{r}
+library("stringr")
+```
+# Using str_subset funtion to find the matching string
+```{r}
+
+major1 <- str_subset(collage_major$Major, "DATA")
+major1
+```
+# Extract matching rows with str_detect
+```{r}
+major1 <- collage_major[str_detect(collage_major$Major, "DATA"), ]  
+major1
 
 ```
 
 ```{r}
-
+major2 <- str_subset(collage_major$Major, "STATISTICS")
+major2
 ```
 
 ```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
+major2 <- collage_major[str_detect(collage_major$Major, "STATISTICS"), ]  
+major2
 ```
 
