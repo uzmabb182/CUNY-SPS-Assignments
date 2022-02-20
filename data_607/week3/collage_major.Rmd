@@ -88,10 +88,35 @@ str_view(c("grrgff", "a.ccc.c", "a*aa*c", "a c"), "(.)(.)\\2\\1")
 ```
 
 ```{r}
+# This will find two character that are repeating itself once
+
+str_view(c("grrrrgff", "a.ccc.c.c", "a*aaaa*c", "a c"), "(..)\1")
+```
+
+```{r}
+# This will find a character, followed by any character and repeat of 1st character and again repeat step 2 and 3.
+str_view(c("grrrrgff", "a.c2c3c.c.c", "a*adafaa*c"), "(.).\\1.\\1")
+```
+
+```{r}
+# This will find three charactrs followed by any number of other characters
+# then the repeat of first three character in reverse order
+
+str_view(c("lmnx*xmnlff", "a.uzmac2c3camzu.c.c", "a*adafaa*c"), "(.)(.)(.).*\\3\\2\\1")
+```
+#4 Construct regular expressions to match words that:
+```{r}
+# Start and end with the same character.
+# (.).*\\1
+
+str_view(c("lmnx*xmnl", "a.uzmac2c3camzu.c.a", "a*adafaa*c"), "(.).*\\1")
 
 ```
 
 ```{r}
+# Contain a repeated pair of letters (e.g. "church" contains "ch" repeated twice.)
+# (.)(.).*\\1\\1
 
+str_view(c("lmnx*xmnl", "a.uzmac2c3camzu.c.a", "churchac"), "(.)(.).*\\1\\2")
 ```
 
