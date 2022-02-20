@@ -120,3 +120,9 @@ str_view(c("lmnx*xmnl", "a.uzmac2c3camzu.c.a", "a*adafaa*c"), "(.).*\\1")
 str_view(c("lmnx*xmnl", "a.uzmac2c3camzu.c.a", "churchac"), "(.)(.).*\\1\\2")
 ```
 
+```{r}
+# Contain one letter repeated in at least three places (e.g. "eleven" contains three "e"s.)
+
+str_view(c("lmnx*xmnl", "eleven", "churchac"), "(.).*\\1*\\1*\\1")
+```
+
