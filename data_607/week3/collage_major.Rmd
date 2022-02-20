@@ -1,5 +1,5 @@
 ---
-title: "Collage Major - Sreing Manipulation"
+title: "Collage Major - String Manipulation"
 output: html_document
 ---
 
