@@ -94,7 +94,8 @@ str_view(c("grrrrgff", "a.ccc.c.c", "a*aaaa*c", "a c"), "(..)\1")
 ```
 
 ```{r}
-# This will find a character, followed by any character and repeat of 1st character and again repeat step 2 and 3.
+# 1-This will find a character, 2- followed by any one character 3- and repeat of 1st character 
+# and again repeat step 2 and 3.
 str_view(c("grrrrgff", "a.c2c3c.c.c", "a*adafaa*c"), "(.).\\1.\\1")
 ```
 
