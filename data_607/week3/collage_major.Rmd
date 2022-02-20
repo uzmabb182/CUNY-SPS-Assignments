@@ -25,7 +25,7 @@ collage_major <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/dat
 
 collage_major
 ```
-# Code that identifies the majors that contain either "DATA" or "STATISTICS"
+#1 Code that identifies the majors that contain either "DATA" or "STATISTICS"
 ```{r}
 library("stringr")
 ```
@@ -50,5 +50,48 @@ major2
 ```{r}
 major2 <- collage_major[str_detect(collage_major$Major, "STATISTICS"), ]  
 major2
+```
+#2 Write code that transforms the data below:
+```{r}
+# Creating four vectors with quotations added:
+
+fruit_category_1 <- c("\"bell pepper\"", "\"bilberry\"", "\"blackberry\"", "\"blood orange\"")
+
+fruit_category_2 <- c("\"blueberry\"", "\"cantaloupe\"", "\"chili pepper\"", "\"cloudberry\"")
+
+fruit_category_3 <- c("\"elderberry\"", "\"lime\"", "\"lychee\"", "\"mulberry\"")
+
+fruit_category_4 <- c("\"olive\"", "\"lsalal berry\"")
+
+```
+
+```{r}
+ writeLines(fruit_category_1)         
+```
+
+```{r}
+x <- str_c(c(fruit_category_1, fruit_category_2, fruit_category_3, fruit_category_4), collapse = ", ")
+writeLines(x)   
+```
+#3 Describe, in words, what these expressions will match:
+```{r}
+# This will match any one character, which is followed by repetition of same character
+
+str_view(c("abbbbc", "a.c", "a*c", "a c"), "(.)\1\1")
+```
+
+```{r}
+# This will look for two characters that are repeating in reverse order
+
+str_view(c("grrgff", "a.ccc.c", "a*aa*c", "a c"), "(.)(.)\\2\\1")
+
+```
+
+```{r}
+
+```
+
+```{r}
+
 ```
 
