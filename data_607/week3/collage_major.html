@@ -1385,18 +1385,40 @@ major2</code></pre>
 <p>#2 Write code that transforms the data below:</p>
 <pre class="r"><code># Creating four vectors with quotations added:
 
-fruit_category_1 &lt;- c(&quot;\&quot;bell pepper\&quot;&quot;, &quot;\&quot;bilberry\&quot;&quot;, &quot;\&quot;blackberry\&quot;&quot;, &quot;\&quot;blood orange\&quot;&quot;)
+fruit_category_1 &lt;- c(&quot;bell pepper&quot;, &quot;bilberry&quot;, &quot;blackberry&quot;, &quot;blood orange&quot;)
 
-fruit_category_2 &lt;- c(&quot;\&quot;blueberry\&quot;&quot;, &quot;\&quot;cantaloupe\&quot;&quot;, &quot;\&quot;chili pepper\&quot;&quot;, &quot;\&quot;cloudberry\&quot;&quot;)
+fruit_category_2 &lt;- c(&quot;blueberry&quot;, &quot;cantaloupe&quot;, &quot;chili pepper&quot;, &quot;cloudberry&quot;)
 
-fruit_category_3 &lt;- c(&quot;\&quot;elderberry\&quot;&quot;, &quot;\&quot;lime\&quot;&quot;, &quot;\&quot;lychee\&quot;&quot;, &quot;\&quot;mulberry\&quot;&quot;)
+fruit_category_3 &lt;- c(&quot;elderberry&quot;, &quot;lime&quot;, &quot;lychee&quot;, &quot;mulberry&quot;)
 
-fruit_category_4 &lt;- c(&quot;\&quot;olive\&quot;&quot;, &quot;\&quot;lsalal berry\&quot;&quot;)</code></pre>
+fruit_category_4 &lt;- c(&quot;olive&quot;, &quot;lsalal berry&quot;)</code></pre>
 <pre class="r"><code> writeLines(fruit_category_1)         </code></pre>
+<pre><code>## bell pepper
+## bilberry
+## blackberry
+## blood orange</code></pre>
+<pre class="r"><code>fruit_category_1 &lt;- str_c(&quot;\&quot;&quot;, fruit_category_1, &quot;\&quot;&quot;)
+writeLines(fruit_category_1) </code></pre>
 <pre><code>## &quot;bell pepper&quot;
 ## &quot;bilberry&quot;
 ## &quot;blackberry&quot;
 ## &quot;blood orange&quot;</code></pre>
+<pre class="r"><code>fruit_category_2 &lt;- str_c(&quot;\&quot;&quot;, fruit_category_2, &quot;\&quot;&quot;)
+writeLines(fruit_category_2) </code></pre>
+<pre><code>## &quot;blueberry&quot;
+## &quot;cantaloupe&quot;
+## &quot;chili pepper&quot;
+## &quot;cloudberry&quot;</code></pre>
+<pre class="r"><code>fruit_category_3 &lt;- str_c(&quot;\&quot;&quot;, fruit_category_3, &quot;\&quot;&quot;)
+writeLines(fruit_category_3) </code></pre>
+<pre><code>## &quot;elderberry&quot;
+## &quot;lime&quot;
+## &quot;lychee&quot;
+## &quot;mulberry&quot;</code></pre>
+<pre class="r"><code>fruit_category_4 &lt;- str_c(&quot;\&quot;&quot;, fruit_category_4, &quot;\&quot;&quot;)
+writeLines(fruit_category_4) </code></pre>
+<pre><code>## &quot;olive&quot;
+## &quot;lsalal berry&quot;</code></pre>
 <pre class="r"><code>x &lt;- str_c(c(fruit_category_1, fruit_category_2, fruit_category_3, fruit_category_4), collapse = &quot;, &quot;)
 writeLines(x)   </code></pre>
 <pre><code>## &quot;bell pepper&quot;, &quot;bilberry&quot;, &quot;blackberry&quot;, &quot;blood orange&quot;, &quot;blueberry&quot;, &quot;cantaloupe&quot;, &quot;chili pepper&quot;, &quot;cloudberry&quot;, &quot;elderberry&quot;, &quot;lime&quot;, &quot;lychee&quot;, &quot;mulberry&quot;, &quot;olive&quot;, &quot;lsalal berry&quot;</code></pre>
@@ -1404,47 +1426,47 @@ writeLines(x)   </code></pre>
 <pre class="r"><code># This will match nothing because single backslash does not define any rule
 
 str_view(c(&quot;abbbbc&quot;, &quot;a.c&quot;, &quot;a*c&quot;, &quot;a c&quot;), &quot;(.)\1\1&quot;)</code></pre>
-<div id="htmlwidget-fedbcf3653cfc2b67823" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fedbcf3653cfc2b67823">{"x":{"html":"<ul>\n  <li>abbbbc<\/li>\n  <li>a.c<\/li>\n  <li>a*c<\/li>\n  <li>a c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f64ea9ec7a03c9a8d04c" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f64ea9ec7a03c9a8d04c">{"x":{"html":"<ul>\n  <li>abbbbc<\/li>\n  <li>a.c<\/li>\n  <li>a*c<\/li>\n  <li>a c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># This will look for two characters that are repeating in reverse order
 
 str_view(c(&quot;grrgff&quot;, &quot;a.ccc.c&quot;, &quot;a*aa*c&quot;, &quot;a c&quot;), &quot;(.)(.)\\2\\1&quot;)</code></pre>
-<div id="htmlwidget-759330c313b9fd9c0f03" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-759330c313b9fd9c0f03">{"x":{"html":"<ul>\n  <li><span class='match'>grrg<\/span>ff<\/li>\n  <li>a.ccc.c<\/li>\n  <li>a<span class='match'>*aa*<\/span>c<\/li>\n  <li>a c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
-<pre class="r"><code># his will match nothing because single backslash does not define any rule
+<div id="htmlwidget-2ba7a5e4ffb5651bd162" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2ba7a5e4ffb5651bd162">{"x":{"html":"<ul>\n  <li><span class='match'>grrg<\/span>ff<\/li>\n  <li>a.ccc.c<\/li>\n  <li>a<span class='match'>*aa*<\/span>c<\/li>\n  <li>a c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code># This will match nothing because single backslash does not define any rule
 
 str_view(c(&quot;grrrrgff&quot;, &quot;a.ccc.c.c&quot;, &quot;a*aaaa*c&quot;, &quot;a c&quot;), &quot;(..)\1&quot;)</code></pre>
-<div id="htmlwidget-63a51b0fe4e06538b59b" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-63a51b0fe4e06538b59b">{"x":{"html":"<ul>\n  <li>grrrrgff<\/li>\n  <li>a.ccc.c.c<\/li>\n  <li>a*aaaa*c<\/li>\n  <li>a c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-157fcb025d56429e4a3c" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-157fcb025d56429e4a3c">{"x":{"html":"<ul>\n  <li>grrrrgff<\/li>\n  <li>a.ccc.c.c<\/li>\n  <li>a*aaaa*c<\/li>\n  <li>a c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># 1-This will find a character, 2- followed by any one character 3- and repeat of 1st character 
 # and again repeat step 2 and 3.
 str_view(c(&quot;grrrrgff&quot;, &quot;a.c2c3c.c.c&quot;, &quot;a*adafaa*c&quot;), &quot;(.).\\1.\\1&quot;)</code></pre>
-<div id="htmlwidget-715d6b638507db4d6f17" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-715d6b638507db4d6f17">{"x":{"html":"<ul>\n  <li>grrrrgff<\/li>\n  <li>a.<span class='match'>c2c3c<\/span>.c.c<\/li>\n  <li><span class='match'>a*ada<\/span>faa*c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-2f77c80366e2e996e50b" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2f77c80366e2e996e50b">{"x":{"html":"<ul>\n  <li>grrrrgff<\/li>\n  <li>a.<span class='match'>c2c3c<\/span>.c.c<\/li>\n  <li><span class='match'>a*ada<\/span>faa*c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># This will find three charactrs followed by any number of other characters
 # then the repeat of first three character in reverse order
 
 str_view(c(&quot;lmnx*xmnlff&quot;, &quot;a.uzmac2c3camzu.c.c&quot;, &quot;a*adafaa*c&quot;), &quot;(.)(.)(.).*\\3\\2\\1&quot;)</code></pre>
-<div id="htmlwidget-5a934ce32f847f656b78" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5a934ce32f847f656b78">{"x":{"html":"<ul>\n  <li>lmnx*xmnlff<\/li>\n  <li>a<span class='match'>.uzmac2c3camzu.<\/span>c.c<\/li>\n  <li>a*adafaa*c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-cd7a13cc54608a9d2cfb" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cd7a13cc54608a9d2cfb">{"x":{"html":"<ul>\n  <li>lmnx*xmnlff<\/li>\n  <li>a<span class='match'>.uzmac2c3camzu.<\/span>c.c<\/li>\n  <li>a*adafaa*c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p>#4 Construct regular expressions to match words that:</p>
 <pre class="r"><code># Start and end with the same character.
 # (.).*\\1
 
 str_view(c(&quot;lmnx*xmnl&quot;, &quot;a.uzmac2c3camzu.c.a&quot;, &quot;a*adafaa*c&quot;), &quot;(.).*\\1&quot;)</code></pre>
-<div id="htmlwidget-8b52eca2fd46818ddd62" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8b52eca2fd46818ddd62">{"x":{"html":"<ul>\n  <li><span class='match'>lmnx*xmnl<\/span><\/li>\n  <li><span class='match'>a.uzmac2c3camzu.c.a<\/span><\/li>\n  <li><span class='match'>a*adafaa<\/span>*c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8cd0b0c8bd946c96fd88" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8cd0b0c8bd946c96fd88">{"x":{"html":"<ul>\n  <li><span class='match'>lmnx*xmnl<\/span><\/li>\n  <li><span class='match'>a.uzmac2c3camzu.c.a<\/span><\/li>\n  <li><span class='match'>a*adafaa<\/span>*c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># Contain a repeated pair of letters (e.g. &quot;church&quot; contains &quot;ch&quot; repeated twice.)
 # (.)(.).*\\1\\1
 
 str_view(c(&quot;lmnx*xmnl&quot;, &quot;a.uzmac2c3camzu.c.a&quot;, &quot;churchac&quot;), &quot;(.)(.).*\\1\\2&quot;)</code></pre>
-<div id="htmlwidget-00d797a088a4e3521cb5" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-00d797a088a4e3521cb5">{"x":{"html":"<ul>\n  <li>l<span class='match'>mnx*xmn<\/span>l<\/li>\n  <li>a.uzmac2c3camzu.c.a<\/li>\n  <li><span class='match'>church<\/span>ac<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8c0cd75e0c1a6ca3704d" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8c0cd75e0c1a6ca3704d">{"x":{"html":"<ul>\n  <li>l<span class='match'>mnx*xmn<\/span>l<\/li>\n  <li>a.uzmac2c3camzu.c.a<\/li>\n  <li><span class='match'>church<\/span>ac<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># Contain one letter repeated in at least three places (e.g. &quot;eleven&quot; contains three &quot;e&quot;s.)
 
 str_view(c(&quot;lmnx*xmnl&quot;, &quot;eleven&quot;, &quot;churchac&quot;), &quot;(.).*\\1*\\1*\\1&quot;)</code></pre>
-<div id="htmlwidget-f8b1e0e14dc19ac96323" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f8b1e0e14dc19ac96323">{"x":{"html":"<ul>\n  <li><span class='match'>lmnx*xmnl<\/span><\/li>\n  <li><span class='match'>eleve<\/span>n<\/li>\n  <li><span class='match'>churchac<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-1ad234dd2d8941fecda6" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1ad234dd2d8941fecda6">{"x":{"html":"<ul>\n  <li><span class='match'>lmnx*xmnl<\/span><\/li>\n  <li><span class='match'>eleve<\/span>n<\/li>\n  <li><span class='match'>churchac<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 
 

@@ -55,18 +55,40 @@ major2
 ```{r}
 # Creating four vectors with quotations added:
 
-fruit_category_1 <- c("\"bell pepper\"", "\"bilberry\"", "\"blackberry\"", "\"blood orange\"")
+fruit_category_1 <- c("bell pepper", "bilberry", "blackberry", "blood orange")
 
-fruit_category_2 <- c("\"blueberry\"", "\"cantaloupe\"", "\"chili pepper\"", "\"cloudberry\"")
+fruit_category_2 <- c("blueberry", "cantaloupe", "chili pepper", "cloudberry")
 
-fruit_category_3 <- c("\"elderberry\"", "\"lime\"", "\"lychee\"", "\"mulberry\"")
+fruit_category_3 <- c("elderberry", "lime", "lychee", "mulberry")
 
-fruit_category_4 <- c("\"olive\"", "\"lsalal berry\"")
+fruit_category_4 <- c("olive", "lsalal berry")
 
 ```
 
 ```{r}
  writeLines(fruit_category_1)         
+```
+
+```{r}
+fruit_category_1 <- str_c("\"", fruit_category_1, "\"")
+writeLines(fruit_category_1) 
+```
+
+```{r}
+fruit_category_2 <- str_c("\"", fruit_category_2, "\"")
+writeLines(fruit_category_2) 
+```
+
+```{r}
+fruit_category_3 <- str_c("\"", fruit_category_3, "\"")
+writeLines(fruit_category_3) 
+
+```
+
+```{r}
+fruit_category_4 <- str_c("\"", fruit_category_4, "\"")
+writeLines(fruit_category_4) 
+
 ```
 
 ```{r}
@@ -88,7 +110,7 @@ str_view(c("grrgff", "a.ccc.c", "a*aa*c", "a c"), "(.)(.)\\2\\1")
 ```
 
 ```{r}
-# his will match nothing because single backslash does not define any rule
+# This will match nothing because single backslash does not define any rule
 
 str_view(c("grrrrgff", "a.ccc.c.c", "a*aaaa*c", "a c"), "(..)\1")
 ```
