@@ -75,7 +75,7 @@ writeLines(x)
 ```
 #3 Describe, in words, what these expressions will match:
 ```{r}
-# This will match any one character, which is followed by repetition of same character
+# This will match nothing because single backslash does not define any rule
 
 str_view(c("abbbbc", "a.c", "a*c", "a c"), "(.)\1\1")
 ```
@@ -88,7 +88,7 @@ str_view(c("grrgff", "a.ccc.c", "a*aa*c", "a c"), "(.)(.)\\2\\1")
 ```
 
 ```{r}
-# This will find two character that are repeating itself once
+# his will match nothing because single backslash does not define any rule
 
 str_view(c("grrrrgff", "a.ccc.c.c", "a*aaaa*c", "a c"), "(..)\1")
 ```

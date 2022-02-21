@@ -1401,50 +1401,50 @@ fruit_category_4 &lt;- c(&quot;\&quot;olive\&quot;&quot;, &quot;\&quot;lsalal be
 writeLines(x)   </code></pre>
 <pre><code>## &quot;bell pepper&quot;, &quot;bilberry&quot;, &quot;blackberry&quot;, &quot;blood orange&quot;, &quot;blueberry&quot;, &quot;cantaloupe&quot;, &quot;chili pepper&quot;, &quot;cloudberry&quot;, &quot;elderberry&quot;, &quot;lime&quot;, &quot;lychee&quot;, &quot;mulberry&quot;, &quot;olive&quot;, &quot;lsalal berry&quot;</code></pre>
 <p>#3 Describe, in words, what these expressions will match:</p>
-<pre class="r"><code># This will match any one character, which is followed by repetition of same character
+<pre class="r"><code># This will match nothing because single backslash does not define any rule
 
 str_view(c(&quot;abbbbc&quot;, &quot;a.c&quot;, &quot;a*c&quot;, &quot;a c&quot;), &quot;(.)\1\1&quot;)</code></pre>
-<div id="htmlwidget-1243865151666d9f6c3c" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1243865151666d9f6c3c">{"x":{"html":"<ul>\n  <li>abbbbc<\/li>\n  <li>a.c<\/li>\n  <li>a*c<\/li>\n  <li>a c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-fedbcf3653cfc2b67823" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fedbcf3653cfc2b67823">{"x":{"html":"<ul>\n  <li>abbbbc<\/li>\n  <li>a.c<\/li>\n  <li>a*c<\/li>\n  <li>a c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># This will look for two characters that are repeating in reverse order
 
 str_view(c(&quot;grrgff&quot;, &quot;a.ccc.c&quot;, &quot;a*aa*c&quot;, &quot;a c&quot;), &quot;(.)(.)\\2\\1&quot;)</code></pre>
-<div id="htmlwidget-bdb76641530df5cd1226" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bdb76641530df5cd1226">{"x":{"html":"<ul>\n  <li><span class='match'>grrg<\/span>ff<\/li>\n  <li>a.ccc.c<\/li>\n  <li>a<span class='match'>*aa*<\/span>c<\/li>\n  <li>a c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
-<pre class="r"><code># This will find two character that are repeating itself once
+<div id="htmlwidget-759330c313b9fd9c0f03" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-759330c313b9fd9c0f03">{"x":{"html":"<ul>\n  <li><span class='match'>grrg<\/span>ff<\/li>\n  <li>a.ccc.c<\/li>\n  <li>a<span class='match'>*aa*<\/span>c<\/li>\n  <li>a c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code># his will match nothing because single backslash does not define any rule
 
 str_view(c(&quot;grrrrgff&quot;, &quot;a.ccc.c.c&quot;, &quot;a*aaaa*c&quot;, &quot;a c&quot;), &quot;(..)\1&quot;)</code></pre>
-<div id="htmlwidget-989cc274e4fac9cdf367" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-989cc274e4fac9cdf367">{"x":{"html":"<ul>\n  <li>grrrrgff<\/li>\n  <li>a.ccc.c.c<\/li>\n  <li>a*aaaa*c<\/li>\n  <li>a c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-63a51b0fe4e06538b59b" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-63a51b0fe4e06538b59b">{"x":{"html":"<ul>\n  <li>grrrrgff<\/li>\n  <li>a.ccc.c.c<\/li>\n  <li>a*aaaa*c<\/li>\n  <li>a c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># 1-This will find a character, 2- followed by any one character 3- and repeat of 1st character 
 # and again repeat step 2 and 3.
 str_view(c(&quot;grrrrgff&quot;, &quot;a.c2c3c.c.c&quot;, &quot;a*adafaa*c&quot;), &quot;(.).\\1.\\1&quot;)</code></pre>
-<div id="htmlwidget-9a098636631c0c2d24ea" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9a098636631c0c2d24ea">{"x":{"html":"<ul>\n  <li>grrrrgff<\/li>\n  <li>a.<span class='match'>c2c3c<\/span>.c.c<\/li>\n  <li><span class='match'>a*ada<\/span>faa*c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-715d6b638507db4d6f17" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-715d6b638507db4d6f17">{"x":{"html":"<ul>\n  <li>grrrrgff<\/li>\n  <li>a.<span class='match'>c2c3c<\/span>.c.c<\/li>\n  <li><span class='match'>a*ada<\/span>faa*c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># This will find three charactrs followed by any number of other characters
 # then the repeat of first three character in reverse order
 
 str_view(c(&quot;lmnx*xmnlff&quot;, &quot;a.uzmac2c3camzu.c.c&quot;, &quot;a*adafaa*c&quot;), &quot;(.)(.)(.).*\\3\\2\\1&quot;)</code></pre>
-<div id="htmlwidget-b5d62064c4ab3d4335d4" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b5d62064c4ab3d4335d4">{"x":{"html":"<ul>\n  <li>lmnx*xmnlff<\/li>\n  <li>a<span class='match'>.uzmac2c3camzu.<\/span>c.c<\/li>\n  <li>a*adafaa*c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5a934ce32f847f656b78" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5a934ce32f847f656b78">{"x":{"html":"<ul>\n  <li>lmnx*xmnlff<\/li>\n  <li>a<span class='match'>.uzmac2c3camzu.<\/span>c.c<\/li>\n  <li>a*adafaa*c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p>#4 Construct regular expressions to match words that:</p>
 <pre class="r"><code># Start and end with the same character.
 # (.).*\\1
 
 str_view(c(&quot;lmnx*xmnl&quot;, &quot;a.uzmac2c3camzu.c.a&quot;, &quot;a*adafaa*c&quot;), &quot;(.).*\\1&quot;)</code></pre>
-<div id="htmlwidget-9ec5ba556d0a01c74cae" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9ec5ba556d0a01c74cae">{"x":{"html":"<ul>\n  <li><span class='match'>lmnx*xmnl<\/span><\/li>\n  <li><span class='match'>a.uzmac2c3camzu.c.a<\/span><\/li>\n  <li><span class='match'>a*adafaa<\/span>*c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8b52eca2fd46818ddd62" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8b52eca2fd46818ddd62">{"x":{"html":"<ul>\n  <li><span class='match'>lmnx*xmnl<\/span><\/li>\n  <li><span class='match'>a.uzmac2c3camzu.c.a<\/span><\/li>\n  <li><span class='match'>a*adafaa<\/span>*c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># Contain a repeated pair of letters (e.g. &quot;church&quot; contains &quot;ch&quot; repeated twice.)
 # (.)(.).*\\1\\1
 
 str_view(c(&quot;lmnx*xmnl&quot;, &quot;a.uzmac2c3camzu.c.a&quot;, &quot;churchac&quot;), &quot;(.)(.).*\\1\\2&quot;)</code></pre>
-<div id="htmlwidget-dab609ac791c5f3ffcba" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dab609ac791c5f3ffcba">{"x":{"html":"<ul>\n  <li>l<span class='match'>mnx*xmn<\/span>l<\/li>\n  <li>a.uzmac2c3camzu.c.a<\/li>\n  <li><span class='match'>church<\/span>ac<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-00d797a088a4e3521cb5" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-00d797a088a4e3521cb5">{"x":{"html":"<ul>\n  <li>l<span class='match'>mnx*xmn<\/span>l<\/li>\n  <li>a.uzmac2c3camzu.c.a<\/li>\n  <li><span class='match'>church<\/span>ac<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># Contain one letter repeated in at least three places (e.g. &quot;eleven&quot; contains three &quot;e&quot;s.)
 
 str_view(c(&quot;lmnx*xmnl&quot;, &quot;eleven&quot;, &quot;churchac&quot;), &quot;(.).*\\1*\\1*\\1&quot;)</code></pre>
-<div id="htmlwidget-69dfac4368cc7927e741" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-69dfac4368cc7927e741">{"x":{"html":"<ul>\n  <li><span class='match'>lmnx*xmnl<\/span><\/li>\n  <li><span class='match'>eleve<\/span>n<\/li>\n  <li><span class='match'>churchac<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f8b1e0e14dc19ac96323" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f8b1e0e14dc19ac96323">{"x":{"html":"<ul>\n  <li><span class='match'>lmnx*xmnl<\/span><\/li>\n  <li><span class='match'>eleve<\/span>n<\/li>\n  <li><span class='match'>churchac<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 
 
