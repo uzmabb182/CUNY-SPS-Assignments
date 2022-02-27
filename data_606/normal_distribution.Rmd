@@ -1,0 +1,117 @@
+---
+title: "The Normal Distribution - Week 4"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+# load the packages
+```{r}
+library(tidyverse)
+library(openintro)
+
+```
+
+
+```{r}
+
+data("fastfood", package='openintro')
+head(fastfood)
+
+```
+# Filter the fastfood for values "Mcdonalds" and "Dairy Queen"
+```{r}
+mcdonalds <- fastfood %>%
+  filter(restaurant == "Mcdonalds")
+
+mcdonalds
+```
+
+
+```{r}
+dairy_queen <- fastfood %>%
+  filter(restaurant == "Dairy Queen")
+
+dairy_queen
+```
+
+# Exercise 1: Make a plot (or plots) to visualize the distributions of the amount of calories from fat of the options 
+# from these two restaurants. How do their centers, shapes, and spreads compare?
+
+# Both the distributions are right skewed in the frequency histogram. There is a sudden drop in the distribution McDonalds fat calories data.
+```{r}
+mcdonalds %>%
+  ggplot() +
+  geom_histogram(aes(x = cal_fat), bins = 5) +
+  ggtitle("Distribution of McDonalds Fat Calories") +
+  xlab("Calories from Fat") +
+  ylab("Frequency")
+```
+
+```{r}
+dairy_queen %>%
+  ggplot() +
+  geom_histogram(aes(x = cal_fat), bins = 5) +
+  ggtitle("Distribution of Dairy Queen Fat Calories") +
+  xlab("Calories from Fat") +
+  ylab("Frequency")
+```
+# Calculating the summary
+```{r}
+summary(mcdonalds$cal_fat)
+hist(mcdonalds$cal_fat)
+```
+
+```{r}
+summary(dairy_queen$cal_fat)
+hist(dairy_queen$cal_fat)
+```
+
+# Calculating the mean and standard deviation
+```{r}
+dairy_queen_mean <- mean(dairy_queen$cal_fat)
+dairy_queen_mean
+
+```
+
+
+```{r}
+
+dairy_queen_sd   <- sd(dairy_queen$cal_fat)
+dairy_queen_sd
+
+```
+
+# Now creating the density histogram
+```{r}
+ggplot(data = dairy_queen, aes(x = cal_fat)) +
+        geom_blank() +
+        geom_histogram(aes(y = ..density..)) +
+        stat_function(fun = dnorm, args = c(mean = dairy_queen_mean, sd = dairy_queen_sd), col = "tomato")
+
+```
+Exercise 2: Based on the this plot, does it appear that the data follow a nearly normal distribution?
+```{r}
+ggplot(data = mcdonalds, aes(sample = cal_fat)) + 
+  geom_line(stat = "qq")
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
