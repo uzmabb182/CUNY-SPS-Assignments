@@ -100,17 +100,28 @@ ggplot(data = dairy_queen, aes(x = cal_fat)) +
 
 ```
 Exercise 2: Based on the this plot, does it appear that the data follow a nearly normal distribution?
+
+# One way to find if the data is normally distributed is by looking at the shape of the histogram.
+# Another way is to constructing a normal probability plot, also called a normal Q-Q plot for “quantile-quantile”.
+
 ```{r}
 ggplot(data = mcdonalds, aes(sample = cal_fat)) + 
   geom_line(stat = "qq")
 
 ```
+# simulating data from a normal distribution using rnorm.
 
 ```{r}
+sim_norm <- rnorm(n = nrow(dairy_queen), mean = dairy_queen_mean, sd = dairy_queen_sd)
 
+sim_norm
 ```
+# Exercise 3: Make a normal probability plot of sim_norm. Do all of the points fall on the line? How does this plot compare # to the probability plot for the real data? (Since sim_norm is not a data frame, it can be put directly into the sample 
+# argument and the data argument can be dropped.)
 
 ```{r}
+
+qqnormsim(sample = cal_fat, data = dairy_queen)
 
 ```
 
