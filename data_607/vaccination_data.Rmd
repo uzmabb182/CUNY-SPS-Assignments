@@ -1,0 +1,87 @@
+---
+title: "Week 5 Tidying and Transforming Data"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+```{r}
+library("dplyr")
+library("tidyverse")
+```
+
+# Creating a data frame:
+```{r}
+# create the empty data frame
+vaccination_df <- data.frame( age = character(),
+                  pop_not_vax = double(),
+                  po_not_vax_per = double(),
+                  pop_vax = double(),
+                  pop_vax_per = double(),
+                  case_not_vax = double(),
+                  case_vax = double()
+)
+
+vaccination_df
+
+```
+
+# Adding values into the dataframe
+```{r}
+
+vaccination_df <- vaccination_df %>% 
+add_row(
+  age = "under 50",
+  pop_not_vax = 1116834,
+  po_not_vax_per = 0.233,
+  pop_vax = 3501118,
+  pop_vax_per = 0.730,
+  case_not_vax = 43,
+  case_vax = 11
+) %>% 
+  add_row(
+    age = "over 50",
+    pop_not_vax = 186078,
+    po_not_vax_per = 0.079,
+    pop_vax = 2133516,
+    pop_vax_per = 0.904,
+    case_not_vax = 171,
+    case_vax = 290
+  )
+
+vaccination_df
+
+```
+
+# Creating a CSV file
+```{r}
+
+write.csv(vaccination_df, "C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week5/vaccination_data_analysis.csv", row.names=FALSE)
+
+
+```
+
+# Reading from a CSV file
+
+```{r}
+vaccine_df <- read_csv( file = "C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week5/vaccination_data_analysis.csv")
+```
+
+```{r}
+glimpse(vaccine_df)
+```
+
+```{r}
+vaccine_df
+```
+
+
