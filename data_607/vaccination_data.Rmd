@@ -23,12 +23,12 @@ library("tidyverse")
 ```{r}
 # create the empty data frame
 vaccination_df <- data.frame( age = character(),
-                  pop_not_vax = double(),
-                  po_not_vax_per = double(),
-                  pop_vax = double(),
-                  pop_vax_per = double(),
-                  case_not_vax = double(),
-                  case_vax = double()
+                  unvaccinated_pop = double(),
+                  unvaccinated_pop_per_100K = double(),
+                  vaccinated_pop = double(),
+                  vaccinated_pop_per_100K = double(),
+                  unvaccinated_cases = double(),
+                  vaccinated_cases = double()
 )
 
 vaccination_df
@@ -41,21 +41,21 @@ vaccination_df
 vaccination_df <- vaccination_df %>% 
 add_row(
   age = "under 50",
-  pop_not_vax = 1116834,
-  po_not_vax_per = 0.233,
-  pop_vax = 3501118,
-  pop_vax_per = 0.730,
-  case_not_vax = 43,
-  case_vax = 11
+  unvaccinated_pop = 1116834,
+  unvaccinated_pop_per_100K = 0.233,
+  vaccinated_pop = 3501118,
+  vaccinated_pop_per_100K = 0.730,
+  unvaccinated_cases = 43,
+  vaccinated_cases = 11
 ) %>% 
   add_row(
     age = "over 50",
-    pop_not_vax = 186078,
-    po_not_vax_per = 0.079,
-    pop_vax = 2133516,
-    pop_vax_per = 0.904,
-    case_not_vax = 171,
-    case_vax = 290
+    unvaccinated_pop = 186078,
+    unvaccinated_pop_per_100K = 0.079,
+    vaccinated_pop = 2133516,
+    vaccinated_pop_per_100K = 0.904,
+    unvaccinated_cases = 171,
+    vaccinated_cases = 290
   )
 
 vaccination_df
@@ -82,6 +82,53 @@ glimpse(vaccine_df)
 
 ```{r}
 vaccine_df
+```
+
+```{r}
+
+# afficacy vs. severe disease = 1 - (% fully vaxed severe cases per 100K / % not vaxed severe cases per 100K)
+
+# (1) Do you have enough information to calculate the total population?  What does this total population represent?						
+# (2) Calculate the Efficacy vs. Disease; Explain your results.						
+# (3) From your calculation of efficacy vs. disease, are you able to compare the rate of severe cases in unvaccinated 
+# individuals to that in vaccinated individuals?						
+						
+# Population	7,155,090	Population includes Israelis age 12 and up; also includes partially vaxed individuals				
+						
+#	<50: 3.9 / 0.3	13.0	{ How should these numbers be intepreted?			
+#	>50: 91.9 / 13.6	6.8				
+
+
+
+```
+
+```{r}
+total_population <- select(vaccine_df, "age", "unvaccinated_pop", "vaccinated_pop") 
+
+total_population
+```
+
+```{r}
+
+# (1) Do you have enough information to calculate the total population?  What does this total population represent?	
+
+total_population <-
+  mutate(total_population,
+  total_pop = (unvaccinated_pop + vaccinated_pop)
+  )
+
+```
+
+```{r}
+total_population
+```
+
+```{r}
+sum(total_population[, 'total_pop'])
+```
+
+```{r}
+
 ```
 
 
