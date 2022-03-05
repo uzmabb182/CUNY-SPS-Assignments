@@ -1,3 +1,4 @@
-"age","unvaccinated_pop","unvaccinated_pop_per_100K","vaccinated_pop","vaccinated_pop_per_100K","unvaccinated_cases","vaccinated_cases"
+"age","unvaccinated_pop","unvaccinated_pop_per_100K","vaccinated_pop","vaccinated_pop_per_100K","unvaccinated_severe_cases","vaccinated_severe_cases"
 "under 50",1116834,0.233,3501118,0.73,43,11
 "over 50",186078,0.079,2133516,0.904,171,290
+"total",1302912,18.2,5634634,78.7,214,301
