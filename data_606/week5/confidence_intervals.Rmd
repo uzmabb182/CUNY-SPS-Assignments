@@ -1,0 +1,101 @@
+---
+title: "Foundations for statistical inference - Confidence intervals"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+# Load Packages:
+```{r}
+library(tidyverse)
+library(openintro)
+library(infer)
+```
+
+# we will assume a total population size of 100,000 (even though that’s smaller than the population size of all US adults).
+# In this lab, you will assume this 62% is a true population proportion and learn about how sample proportions can vary from 
+# of 100,000. This means 62,000 (62%) of the adult population think climate change impacts their community, 
+# and the remaining 38,000 does not think so.
+
+```{r}
+us_adults <- tibble(
+  climate_change_affects = c(rep("Yes", 62000), rep("No", 38000))
+)
+
+us_adults
+```
+# We can quickly visualize the distribution of these responses using a bar plot.
+
+```{r}
+ggplot(us_adults, aes(x = climate_change_affects)) +
+  geom_bar(fill = 'blue') +
+  labs(
+    x = "", y = "",
+    title = "Do you think climate change is affecting your local community?"
+  ) +
+  coord_flip() 
+```
+
+# We can also obtain summary statistics to confirm we constructed the data frame correctly.
+
+```{r}
+us_adults %>%
+  count(climate_change_affects) %>%
+  mutate(p = n /sum(n))
+```
+
+# a simple random sample of size 60 from the population.
+
+```{r}
+n <- 60
+samp <- us_adults %>%
+  sample_n(size = n)
+
+samp
+```
+# Exercise 1:
+
+# What percent of the adults in your sample think climate change affects their local community?
+
+```{r}
+# 62% of the adults in the sample think that the climate change affects their local community
+```
+
+# Exercise 2:
+
+# Would you expect another student’s sample proportion to be identical to yours? Would you expect it to be similar? 
+Why or why not?
+
+```{r}
+# No we would not expect the samples proportion to be identical but they can be similar.
+```
+
+```{r}
+# With just one sample, the best estimate of the proportion of US adults who think climate change affects their 
+# local community would be the sample proportion, usually denoted as p^ (here we are calling it p_hat). 
+# That serves as a good point estimate, but it would be useful to also communicate how uncertain you are of 
+# that estimate. This uncertainty can be quantified using a confidence interval.
+
+# One way of calculating a confidence interval for a population proportion is based on the Central Limit Theorem
+# Another way is using simulation, or to be more specific, using bootstrapping
+```
+
+# Exercise 3:
+
+# In the interpretation above, we used the phrase “95% confident”. What does “95% confidence” mean?
+# This code will find the 95 percent confidence interval for proportion of US adults who think 
+# climate change affects their local community.
+
+```{r}
+
+```
+
+
