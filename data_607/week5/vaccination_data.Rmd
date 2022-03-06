@@ -165,7 +165,14 @@ vaccine_df
 # While for the total population, the efficacy drop down to 67.5%
 
 # The reason is because the severe cases in the over 50 population are happening at a rate of 92% and this is causing overall average to go down.
-```
+
+
+
+
+
+
+
+
 
 
 
