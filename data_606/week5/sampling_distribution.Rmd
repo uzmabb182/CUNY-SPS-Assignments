@@ -76,12 +76,103 @@ samp1 %>%
 # The distribution of the responses in this sample is slightly different with 86% benifits 
 # and 14% doesn't benefit
 ```{r}
-  geom_bar() +
+ ggplot(samp1, aes(x = scientist_work)) +
+  geom_bar(fill = "blue") +
   labs(
     x = "", y = "",
     title = "Do you believe that the work scientists do benefit people like you?"
   ) +
   coord_flip() 
+```
+Exercise 2:
+# Would you expect the sample proportion to match the sample proportion of another student’s sample? 
+# Why, or why not? If the answer is no, would you expect the proportions to be somewhat different 
+# or very different?
+
+
+```{r}
+# I would expect the sample proportion to not match the the sample proportion of another student’s sample.
+# Because each time we take random sample from the population which is a large pool of 100000. 
+# This will bring a different sample data each time.
+```
+
+Exercise 3:
+# Take a second sample, also of size 50, and call it samp2. How does the sample proportion of samp2 
+# compare with that of samp1? Suppose we took two more samples, one of size 100 and one of size 1000. 
+# Which would you think would provide a more accurate estimate of the population proportion?
+
+```{r}
+samp2 <- global_monitor %>%
+  sample_n(50)
+samp2 %>%
+  count(scientist_work) %>%
+  mutate(p_hat = n /sum(n))
+```
+# To visualize the result
+```{r}
+ ggplot(samp2, aes(x = scientist_work)) +
+  geom_bar(fill = "purple") +
+  labs(
+    x = "", y = "",
+    title = "Do you believe that the work scientists do benefit people like you?"
+  ) +
+  coord_flip() 
+```
+
+```{r}
+# The data is a bit different in samp2, with more people in group ‘doesn’t benefit’. 
+# Also, the sample size is so small it also has a large impact on the p_hat.
+```
+
+```{r}
+# sample 100
+
+samp3 <- global_monitor %>%
+  sample_n(100)
+
+samp3 %>%
+  count(scientist_work) %>%
+  mutate(p3 = n /sum(n))
+```
+
+```{r}
+ggplot(samp3, aes(x = scientist_work)) +
+    geom_bar(position = position_dodge(), width = 0.5, fill = "blue" ) +
+    coord_flip() + 
+    ggtitle("Do you believe that the work scientists do benefit sample 0f 100?") +
+    xlab("") + ylab("")
+```
+
+```{r}
+# sample 1000
+
+samp4 <- global_monitor %>%
+  sample_n(1000)
+
+samp4 %>%
+  count(scientist_work) %>%
+  mutate(p4 = n /sum(n))
+```
+
+```{r}
+ggplot(samp4, aes(x = scientist_work)) +
+    geom_bar(position = position_dodge(), width = 0.5, fill = "green" ) +
+    coord_flip() + 
+    ggtitle("Do you believe that the work scientists do benefit sample 0f 10000?") +
+    xlab("") + ylab("")
+```
+
+```{r}
+# Everytime we take a different size sample, we get different proportion of results. The distribution of sample proportions, called the sampling distribution (of the proportion), can help us understand this variability.
+```
+
+Exercise 4:
+# How many elements are there in sample_props50? Describe the sampling distribution, 
+# and be sure to specifically note its center. Make sure to include a plot 
+# of the distribution in your answer.
+
+```{r}
+
 ```
 
 ```{r}
