@@ -138,7 +138,94 @@ samp %>%
 # If not, explain why. Make sure to include your plot in your answer.
 
 ```{r}
+samp %>%
+  specify(response = climate_change_affects, success = "Yes") %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "prop") %>%
+  get_ci(level = 0.50)
+```
 
+```{r}
+
+# this is interpreted as saying that 50% confidence that the true population proportion falls 
+# between 41.6% and 50% confidence interval. For 50% confidence, the confidence interval get narrowed.
+# 45.8% is the center of the interval. Adding 4.2% margin of error to the center will give upper and lower limit of 
+# confidence interval.
+
+```
+
+# Exercise 7:
+# Choose a different confidence level than 95%. Would you expect a confidence interval at this level to me 
+# wider or narrower than the confidence interval you calculated at the 95% confidence level? Explain your reasoning.
+
+```{r}
+# The interval gets narrower because the confidence level is lower.
+```
+
+# Exercise 8:
+# Using code from the infer package and data fromt the one sample you have (samp), find a confidence interval 
+# for the proportion of US Adults who think climate change is affecting their local community with a confidence 
+# level of your choosing (other than 95%) and interpret it.
+
+
+```{r}
+samp %>%
+  specify(response = climate_change_affects, success = "Yes") %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "prop") %>%
+  get_ci(level = 0.75)
+
+```
+
+```{r}
+# 75% confidence level and the boundaries were very narrow. The distribution became very narrow 
+# because of lower confidence level, that the sample is not be truth.
+```
+
+# Exercise 9:
+# Using the app, calculate 50 confidence intervals at the confidence level you chose in the previous question, 
+# and plot all intervals on one plot, and calculate the proportion of intervals that include the true 
+# population proportion. How does this percentage compare to the confidence level selected for the intervals?
+
+```{r}
+# It is still narrow, as less than 95% confidence level the distribution becomes narrower, but it looks very similar 
+# to the sample size 50 or much higher.
+```
+
+# Exercise 10:
+# Lastly, try one more (different) confidence level. First, state how you expect the width of this interval to 
+# compare to previous ones you calculated. Then, calculate the bounds of the interval using the infer package 
+# and data from samp and interpret it. Finally, use the app to generate many intervals and calculate the 
+# proportion of intervals that are capture the true population proportion.
+
+```{r}
+samp %>%
+  specify(response = climate_change_affects, success = "Yes") %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "prop") %>%
+  get_ci(level = 0.35)
+
+```
+
+```{r}
+# It is very narrow, as confidence level is at 35%. It is visible the uncertainty of 
+# data at such a low confidence level.
+```
+
+# Exercise 11:
+# Using the app, experiment with different sample sizes and comment on how the widths of intervals 
+# change as sample size changes (increases and decreases).
+
+```{r}
+# The higher the confidence level, the wider the intervals become. As the confidence interval gets smaller, the intervals get wider.
+```
+
+# Exercise 12:
+# Finally, given a sample size (say, 60), how does the width of the interval change as you increase 
+# the number of bootstrap samples. Hint: Does changing the number of bootstap samples affect the standard error?
+
+```{r}
+# In sample size 60 the higher bootrap sample the broader and better distribution of the true population proportion.
 ```
 
 
