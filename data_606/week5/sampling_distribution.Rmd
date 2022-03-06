@@ -13,16 +13,87 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
+# Load Packages:
+```{r}
+install.packages("infer")
+
+```
+
+```{r}
+library(tidyverse)
+library(openintro)
+library(infer)
+```
+# The Data:
+
+# We will first create our population assuming a population size of 100,000. This means 20,000 (20%) of the 
+# population think the work scientists do does not benefit them personally and the remaining 80,000
+# think it does.
+```{r}
+global_monitor <- tibble(
+  scientist_work = c(rep("Benefits", 80000), rep("Doesn't benefit", 20000))
+)
+
+global_monitor
+```
+
+# To visualize the distribution of these responses using a bar plot.
+```{r}
+ggplot(global_monitor, aes(x = scientist_work)) +
+  geom_bar() +
+  labs(
+    x = "", y = "",
+    title = "Do you believe that the work scientists do benefit people like you?"
+  ) +
+  coord_flip() 
+```
+
+# Summary statistics to confirm we constructed the data frame correctly.
+```{r}
+global_monitor %>%
+  count(scientist_work) %>%
+  mutate(p = n /sum(n))
+```
+# The unknown sampling distribution:
+# Use the sample_n command to survey the population.
+```{r}
+samp1 <- global_monitor %>%
+  sample_n(50)
+
+samp1
+```
+# Exercise 1:
+# Describe the distribution of responses in this sample. How does it compare to the distribution of 
+# responses in the population.
+# Estimating the proportion of all people who do not believe that the work scientists do benefits them
+# by guessing the sample mean 
+
+```{r}
+samp1 %>%
+  count(scientist_work) %>%
+  mutate(p_hat = n /sum(n))
+```
+# The distribution of the responses in this sample is slightly different with 86% benifits 
+# and 14% doesn't benefit
+```{r}
+  geom_bar() +
+  labs(
+    x = "", y = "",
+    title = "Do you believe that the work scientists do benefit people like you?"
+  ) +
+  coord_flip() 
+```
+
 ```{r}
 
 ```
 
-## Including Plots
+```{r}
 
-You can also embed plots, for example:
+```
 
 ```{r}
 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
