@@ -1,0 +1,86 @@
+---
+title: "Week 6-Inference for categorical data"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+# Load packages
+```{r}
+library(tidyverse)
+library(openintro)
+library(ggplot2)
+library(infer)
+```
+
+# The Data
+```{r}
+yrbss
+```
+```{r}
+count_yrbss <- count(yrbss)
+count_yrbss
+```
+
+
+# Exercise 1:
+# What are the counts within each category for the amount of days these students have texted while driving 
+# within the past 30 days?
+```{r}
+female_df <- yrbss %>% filter(gender == "female")
+female_df
+```
+
+```{r}
+female_count <-  count(female_df)
+female_count
+```
+
+```{r}
+male_df <- yrbss %>% filter(gender == "male")
+male_df
+```
+
+```{r}
+male_count <-  count(male_df)
+male_count
+```
+# Exercise 2:
+# What is the proportion of people who have texted while driving every day in the past 30 days and never wear helmets?
+```{r}
+helmet_never_df <-  yrbss %>% filter(helmet_12m == "never") %>% filter(!text_while_driving_30d %in% c("did not drive","NA","0")) 
+helmet_never_df
+```
+```{r}
+
+```
+
+
+```{r}
+count_helmet_never <- count(helmet_never_df)
+count_helmet_never
+```
+
+```{r}
+prop_texted <- (count_helmet_never/count_yrbss)*100
+prop_texted
+```
+# Inference on proportions:
+
+```{r}
+
+```
+
+```{r}
+
+```
+
