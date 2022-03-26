@@ -26,59 +26,185 @@ library(infer)
 ```{r}
 yrbss
 ```
+
 ```{r}
 count_yrbss <- count(yrbss)
 count_yrbss
 ```
 
-
 # Exercise 1:
 # What are the counts within each category for the amount of days these students have texted while driving 
 # within the past 30 days?
-```{r}
-female_df <- yrbss %>% filter(gender == "female")
-female_df
-```
 
 ```{r}
-female_count <-  count(female_df)
-female_count
+count_each <-yrbss%>%
+  count(text_while_driving_30d)
+count_each
 ```
 
-```{r}
-male_df <- yrbss %>% filter(gender == "male")
-male_df
-```
-
-```{r}
-male_count <-  count(male_df)
-male_count
-```
 # Exercise 2:
 # What is the proportion of people who have texted while driving every day in the past 30 days and never wear helmets?
-```{r}
-helmet_never_df <-  yrbss %>% filter(helmet_12m == "never") %>% filter(!text_while_driving_30d %in% c("did not drive","NA","0")) 
-helmet_never_df
-```
-```{r}
-
-```
-
 
 ```{r}
-count_helmet_never <- count(helmet_never_df)
-count_helmet_never
-```
+no_helmet <- yrbss %>%
+  filter(helmet_12m == "never")
+no_helmet <- no_helmet %>%
+  mutate(text_ind = ifelse(text_while_driving_30d == "30", "yes", "no"))
 
-```{r}
-prop_texted <- (count_helmet_never/count_yrbss)*100
-prop_texted
+no_helmet%>%
+  count(text_ind)
 ```
 # Inference on proportions:
 
 ```{r}
+no_helmet %>%
+  specify(response = text_ind, success = "yes") %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "prop") %>%
+  get_ci(level = 0.95)
+```
+# Exercise 3
+
+# What is the margin of error for the estimate of the proportion of non-helmet wearers that have texted while 
+# driving each day for the past 30 days based on this survey?
+
+```{r}
+n = 6977
+z = 1.96
+p <- seq(from = 0, to = 1, by = 0.01)
+me <- 2 * sqrt(p * (1 - p)/n)
+me = 0.004
+```
+
+# Exercise 4:
+#calculate confidence intervals for two other categorical variables
+
+```{r}
+good_sleep <- yrbss%>%
+  mutate(slept_well = ifelse(school_night_hours_sleep > 5, "yes", "no"))
+
+good_sleep%>%
+    specify(response = slept_well, success = "yes") %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "prop") %>%
+  get_ci(level = 0.95)
+```
+
+
+```{r}
+no_tv <- yrbss %>%
+  mutate(did_not_watch_tv = ifelse(hours_tv_per_school_day == "do not watch", "yes", "no") )
+
+no_tv %>%
+  specify(response = did_not_watch_tv, success = "yes") %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "prop") %>%
+  get_ci(level = 0.95)
 
 ```
+# How does the proportion affect the margin of error?
+
+```{r}
+n <- 1000
+p <- seq(from = 0, to = 1, by = 0.01)
+me <- 2 * sqrt(p * (1 - p)/n)
+dd <- data.frame(p = p, me = me)
+ggplot(data = dd, aes(x = p, y = me)) + 
+  geom_line() +
+  labs(x = "Population Proportion", y = "Margin of Error")
+
+```
+# Exercise 5:
+
+Describe the relationship between p and me. Include the margin of error vs. population proportion plot you constructed in your answer. 
+For a given sample size, for which value of p is margin of error maximized?
+```{r}
+# The margin of error increases as the population proportion increases. And after 50% it begins to decrease.
+```
+# Exercise 6:
+# Describe the sampling distribution of sample proportions at n=300 and p=0.1. Be sure to note the center, spread, and shape.
+
+```{r}
+# The distribution is normal. The center is at 0.1 and the spread is between 0.04 and 0.17
+
+p <- 0.1
+n <- 300
+
+n*p
+
+n*(1-p)
+
+
+```
+# Exercise 7:
+#Keep n constant and change p. How does the shape, center, and spread of the sampling distribution vary as p changes. 
+#You might want to adjust min and max for the x-axis for a better view of the distribution.
+
+```{r}
+# The distribution seems to be normal. The center is at 0.1 and the spread is between 0.05 and 0.16
+
+p <- 0.5
+n <- 300
+
+n*p
+
+n*(1-p)
+```
+# Exercsie 8:
+#Now also change n. How does n appear to affect the distribution of p^?
+
+```{r}
+# When n decrease the spread increase 
+
+p <- 0.5
+n <- 200
+
+n*p
+
+n*(1-p)
+p <- 0.5
+n <- 200
+
+n*p
+
+n*(1-p)
+```
+# Exercise 9:
+
+Null Hypothesis: There is no difference in strength training between students that sleep more than 10+ hours and those who don’t.
+
+Alternative: There is a difference in strength training between students that sleep more than 10+ hours and those who don’t.
+
+There is a 95% confident that the student proportion of those students that sleep more than 10+ hours are between 0.221 and 0.321.
+
+```{r}
+good_sleep <- yrbss  %>%
+  filter(school_night_hours_sleep == "10+")
+good_sleep <- good_sleep %>%
+  mutate(strength = ifelse(strength_training_7d == "7", "yes", "no"))
+good_sleep %>%
+  specify(response = strength, success = "yes") %>%
+  generate(reps = 1000, type = "bootstrap") %>%
+  calculate(stat = "prop") %>%
+  get_ci(level = 0.95)
+```
+
+# Exercise 10:
+
+```{r}
+# There would be a 5% chance of detecting a change. A type 1 error is a false positive
+```
+
+# Exercise 11:
+
+```{r}
+# ME = 1.96 * SE=1.96 * sqrtp(1−p)/n
+
+# n = (0.3)2/(0.01/1.96)2
+
+# n= 3457
+```
+
 
 ```{r}
 

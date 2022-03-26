@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+	<0>
+		<books data></books data>
+	</0>
+	<1>
+		<books data>R for Data Science</books data>
+		<name>Hadley Wickham</name>
+		<author>O Reilly</author>
+		<publisher>978-1491910399</publisher>
+		<isbn-13>2017</isbn-13>
+	</1>
+	<2>
+		<books data>The Language of SQL</books data>
+		<name>Larry Rockoff</name>
+		<author>Pearson Education Inc</author>
+		<publisher>978-0134658254</publisher>
+		<isbn-13>2016</isbn-13>
+	</2>
+	<3>
+		<books data>R for Everyone</books data>
+		<name>Jared P Lander</name>
+		<author>Pearson Education Inc</author>
+		<publisher>978-0134546926</publisher>
+		<isbn-13>2017</isbn-13>
+	</3>
+	<4>
+		<books data>* Data collected for testing purposes</books data>
+	</4>
+</root>

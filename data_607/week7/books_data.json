@@ -1,0 +1,29 @@
+[
+    {
+        "books data": ""
+    },
+    {
+        "books data": "R for Data Science",
+        "name": "Hadley Wickham",
+        "author": "O Reilly",
+        "publisher": "978-1491910399",
+        "isbn-13": "2017"
+    },
+    {
+        "books data": "The Language of SQL",
+        "name": "Larry Rockoff",
+        "author": "Pearson Education Inc",
+        "publisher": "978-0134658254",
+        "isbn-13": "2016"
+    },
+    {
+        "books data": "R for Everyone",
+        "name": "Jared P Lander",
+        "author": "Pearson Education Inc",
+        "publisher": "978-0134546926",
+        "isbn-13": "2017"
+    },
+    {
+        "books data": "* Data collected for testing purposes"
+    }
+]
