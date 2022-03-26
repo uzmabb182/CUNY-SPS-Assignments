@@ -36,11 +36,8 @@ html_data<- read_html("C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week7/books_d
 html_data
 ```
 
-# Install and Load the JSON Package
+# Load the JSON Package
 
-```{r}
-install.packages("rjson")
-```
 
 ```{r}
 library("rjson")
@@ -54,12 +51,7 @@ json_data <- fromJSON(file = "C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week7/
 
 str(json_data)
 ```
-# Installing package and loading the library and other important packages
-
-```{r}
-install.packages("XML")
-```
-
+# loading the library and other important packages
 
 ```{r}
 library("XML")
