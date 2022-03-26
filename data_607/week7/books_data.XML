@@ -1,30 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<root>
-	<0>
-		<books data></books data>
-	</0>
-	<1>
-		<books data>R for Data Science</books data>
-		<name>Hadley Wickham</name>
-		<author>O Reilly</author>
-		<publisher>978-1491910399</publisher>
-		<isbn-13>2017</isbn-13>
-	</1>
-	<2>
-		<books data>The Language of SQL</books data>
-		<name>Larry Rockoff</name>
-		<author>Pearson Education Inc</author>
-		<publisher>978-0134658254</publisher>
-		<isbn-13>2016</isbn-13>
-	</2>
-	<3>
-		<books data>R for Everyone</books data>
-		<name>Jared P Lander</name>
-		<author>Pearson Education Inc</author>
-		<publisher>978-0134546926</publisher>
-		<isbn-13>2017</isbn-13>
-	</3>
-	<4>
-		<books data>* Data collected for testing purposes</books data>
-	</4>
-</root>
+<?xml version="1.0"?>
+<catalog>
+	<book id="001">
+		<author>Hadley Wickham</author>
+		<title>R for Data Science</title>
+		<publisher>G.P. Putnam's Sons</publisher>
+		<isbn>0-399-14446-3</isbn>
+	</book>
+	<book id="002">
+		<author>Kenneth Blanchard, Spencer Johnson</author>
+		<title>The One Minute Manager</title>
+		<price>44.95</price>
+		<published_year>1983</published_year>
+		<publisher>Berkley Trade</publisher>
+		<isbn>0-425-09847-8</isbn>
+	</book>
+	<book id="003">
+		<author>Robert Kiyosaki, Sharon L. Lechter</author>
+		<title>Rich Dad Poor Dad</title>
+		<price>44.95</price>
+		<published_year>2000</published_year>
+		<publisher>Warner Books Ed</publisher>
+		<isbn>0-446-67745-0</isbn>
+	</book>
+</catalog>
