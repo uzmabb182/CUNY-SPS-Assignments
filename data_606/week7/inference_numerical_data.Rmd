@@ -20,16 +20,47 @@ When you click the **Knit** button a document will be generated that includes bo
 
 # Load Packages:
 
-```{}
+```{r}
 library(tidyverse)
 library(openintro)
 library(infer)
 ```
 
+# The Data:
+# Load the yrbss data set
+```{r}
+data('yrbss', package='openintro')
 
+```
 
-```{}
+# Exercise 1:
+# What are the cases in this data set? How many cases are there in our sample?
+```{r}
+glimpse(yrbss)
+```
+# Exploratory data analysis:
 
+```{r}
+summary(yrbss$weight)
+```
+# Exercise 2:
+# How many observations are we missing weights from?
+
+```{r}
+colSums(is.na(yrbss))
+```
+# Extract Rows with NA in Specific Column
+
+```{r}
+na_weight <- yrbss[is.na(yrbss$weight), ]  
+nrow(na_weight)
+```
+
+```{r}
+yrbss <- yrbss %>% 
+  mutate(physical_3plus = ifelse(yrbss$physically_active_7d > 2, "yes", "no"))
+
+yrbss
 ```
 
 
