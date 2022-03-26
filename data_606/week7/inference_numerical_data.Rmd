@@ -24,6 +24,7 @@ When you click the **Knit** button a document will be generated that includes bo
 library(tidyverse)
 library(openintro)
 library(infer)
+library(ggplot2)
 ```
 
 # The Data:
@@ -55,12 +56,27 @@ colSums(is.na(yrbss))
 na_weight <- yrbss[is.na(yrbss$weight), ]  
 nrow(na_weight)
 ```
+# Relationship between a high schooler’s weight and their physical activity
 
 ```{r}
 yrbss <- yrbss %>% 
   mutate(physical_3plus = ifelse(yrbss$physically_active_7d > 2, "yes", "no"))
 
 yrbss
+```
+
+```{r}
+ggplot(data=yrbss, mapping = aes(x = physically_active_7d, y = weight)) + 
+  geom_point(aes(color = weight)) +
+  theme_bw()
+```
+
+```{r}
+
+```
+
+```{r}
+
 ```
 
 
