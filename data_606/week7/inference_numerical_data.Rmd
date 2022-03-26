@@ -56,7 +56,9 @@ colSums(is.na(yrbss))
 na_weight <- yrbss[is.na(yrbss$weight), ]  
 nrow(na_weight)
 ```
-# Relationship between a high schooler’s weight and their physical activity
+
+# create a new variable physical_3plus, which will be coded as either “yes” if they are 
+# physically active for at least 3 days a week, and “no” if not.
 
 ```{r}
 yrbss <- yrbss %>% 
@@ -64,11 +66,295 @@ yrbss <- yrbss %>%
 
 yrbss
 ```
-
+# Relationship between a high schooler’s weight and their physical activity
 ```{r}
 ggplot(data=yrbss, mapping = aes(x = physically_active_7d, y = weight)) + 
   geom_point(aes(color = weight)) +
   theme_bw()
+```
+
+# Exercise 3:
+# Make a side-by-side boxplot of physical_3plus and weight. 
+# Is there a relationship between these two variables? What did you expect and why?
+
+```{r}
+# Median looks similar as well as IQR
+yrbss$physical_3plus<-as.factor(yrbss$physical_3plus)
+yrb_plot<-yrbss%>%
+  filter(!is.na(weight),!is.na(physical_3plus))
+p<-ggplot(yrb_plot, aes(x=physical_3plus,y=weight))+
+  geom_boxplot()
+p
+```
+
+# Comparing the mean of two groups of physical exercise 
+```{r}
+yrbss %>%
+  group_by(physical_3plus) %>%
+  summarise(mean_weight = mean(weight, na.rm = TRUE))
+```
+# Inference:
+
+#Exercise 4:
+# Are all conditions necessary for inference satisfied? 
+# Comment on each. You can compute the group sizes with the 
+# summarize command above by defining a new variable with the definition n().
+```{r}
+# the two gropus are independent and groups are less than 10% of population
+```
+
+```{r}
+#create new variable n
+
+yrbss<- yrbss %>% 
+  mutate(n = ifelse(yrbss$physically_active_7d > 2, "yes", "no"))
+
+yrbss$n<-as.factor(yrbss$n)
+
+view(yrbss)
+yrbss%>%
+ count(n)
+```
+
+# Exercise 5:
+
+# Hypothesis test:
+
+# H_0: the difference in the means between physical 3 plus and less than 3 are equal (mean1-mean2)=0 
+# H_A: the weights are diffferent !=0
+
+```{r}
+obs_diff <- yrbss %>%
+  specify(weight ~ physical_3plus) %>%
+  calculate(stat = "diff in means", order = c("yes", "no"))
+```
+
+```{r}
+null_dist <- yrbss %>%
+  specify(weight ~ physical_3plus) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("yes", "no"))
+```
+
+```{r}
+ggplot(data = null_dist, aes(x = stat)) +
+  geom_histogram()
+```
+
+```{r}
+ggplot(data = null_dist, aes(x = stat)) +
+  geom_histogram()
+```
+# Exercise 6:
+# How many of these null permutations have a difference of at least obs_stat?
+```{r}
+obs_diff_val<-obs_diff$stat[1]
+
+null_list<-as.list(null_dist$stat)
+null_abs<-lapply(null_list, FUN=function(x){abs(x)})
+
+null_dist%>%
+  summarise(mean= mean(stat, na.rm=TRUE))
+```
+
+```{r}
+null_dist%>%
+  filter(stat>obs_diff_val)
+null_dist
+
+# none of the values are greater than the obs_diff_val
+```
+
+```{r}
+null_dist %>%
+  get_p_value(obs_stat = obs_diff, direction = "two_sided")
+
+null_dist
+```
+# Exercise 7:
+# Construct and record a confidence interval for the difference between the weights of those 
+# who exercise at least three times a week and those who don’t, and interpret this interval in context of the data.
+```{r}
+# number of groups
+n_1<-8406
+n_2<-4408
+
+x_bar_diff<-1.78
+T_score<-pt(.025,4407,lower.tail = FALSE)*2
+
+#get sigmas of samples
+sigma_1<-yrbss %>%
+  group_by(physical_3plus) %>%
+  summarise(sd = sd(weight, na.rm = TRUE))%>%
+  filter(physical_3plus=="yes")%>%
+  select(sd)%>%
+  as.double()
+sigma_1
+```
+
+```{r}
+sigma_2<-yrbss %>%
+  group_by(physical_3plus) %>%
+  summarise(sd = sd(weight, na.rm = TRUE))%>%
+  filter(physical_3plus=="no")%>%
+  select(sd)%>%
+  as.double()
+
+sigma_2
+```
+
+```{r}
+SE<-sqrt((sigma_1^2 /n_1)+(sigma_2^2/n_2))
+
+bottom<-x_bar_diff-T_score*SE
+top<-x_bar_diff+T_score*SE
+
+bottom
+top
+
+# there is NO difference bewteen the two groups falls OUTSIDE our 95% confidence interval, we can REJECT the null hypothesis.
+```
+
+
+# Exercise 8:
+# Calculate a 95% confidence interval for the average height in meters (height) and interpret it in context.
+```{r}
+summary(yrbss$height)
+```
+
+```{r}
+height<-yrbss%>%
+  filter(!is.na(height))%>%
+  select(height)
+
+n<-nrow(height)
+df<-n-1
+height<-height$height
+
+
+x_bar<-mean(height)
+sigma<-sd(height)
+SE<-sigma/sqrt(n)
+t_star<-qt(.025,df=df)
+
+#confidence interval
+
+bottom<-x_bar-abs(t_star*SE)
+top<-x_bar+abs(t_star*SE)
+
+bottom
+top
+```
+
+```{r}
+t_star<-abs(qt(.05,df=df))
+# the rest is the same
+x_bar<-mean(height)
+sigma<-sd(height)
+SE<-sigma/sqrt(n)
+bot_1<-x_bar-abs(t_star*SE)
+top_1<-x_bar+abs(t_star*SE)
+
+cat("the 90% confidence interval is ",bot_1," to ",top_1)
+```
+
+```{r}
+# the difference is minor
+
+yrbss<-as.data.frame(yrbss)
+ggplot(yrbss, aes(x=height))+
+  geom_histogram()
+```
+# Exercise 10:
+# Conduct a hypothesis test evaluating whether the average height is different for those who exercise
+# at least three times a week and those who don’t.
+```{r}
+obs_diff <- yrbss %>%
+  specify(height ~ physical_3plus) %>%
+  calculate(stat = "diff in means", order = c("yes", "no"))
+```
+
+```{r}
+# hypothesis test:
+
+# H_0: the difference in the height for the two groups is zero
+
+# (mean_diff=0)
+
+# H_A: the difference in heights is NOT zero
+
+# (mean_diff!=0)
+```
+
+```{r}
+#physically active count
+n_1<-yrbss%>%
+  filter(physical_3plus=="yes")%>%
+  nrow()
+n_2<-yrbss%>%
+  filter(physical_3plus=="no")%>%
+  nrow()
+#difference in mean height
+obs_diff <- yrbss %>%
+  specify(height ~ physical_3plus) %>%
+  calculate(stat = "diff in means", order = c("yes", "no"))#physically active count
+n_1<-yrbss%>%
+  filter(physical_3plus=="yes")%>%
+  nrow()
+n_2<-yrbss%>%
+  filter(physical_3plus=="no")%>%
+  nrow()
+#difference in mean height
+obs_diff <- yrbss %>%
+  specify(height ~ physical_3plus) %>%
+  calculate(stat = "diff in means", order = c("yes", "no"))
+```
+#Sandard deviation for physically active group:
+
+```{r}
+null<-0
+
+sigma_1<-yrbss %>%
+  group_by(physical_3plus) %>%
+  summarise(sd = sd(height, na.rm = TRUE))%>%
+  filter(physical_3plus=="yes")%>%
+  select(sd)%>%
+  as.double()
+```
+
+# ```
+#Sandard deviation for not physically active group:
+
+```{r}
+sigma_2<-yrbss %>%
+  group_by(physical_3plus) %>%
+  summarise(sd = sd(height, na.rm = TRUE))%>%
+  filter(physical_3plus=="no")%>%
+  select(sd)%>%
+  as.double()
+```
+# Caluculation fro Stanadrd Error
+```{r}
+SE<-sqrt((sigma_1^2 /n_1)+(sigma_2^2/n_2))
+T_score<-abs(qt(.025,4407))
+
+bottom<-x_bar_diff-T_score*SE
+top<-x_bar_diff+T_score*SE
+
+bottom
+top
+# The null value falls outside this range so we can REJECT the null hypothesis 
+```
+# Exercise 11:
+# Now, a non-inference task: Determine the number of different options there are 
+# in the dataset for the hours_tv_per_school_day there are.
+
+```{r}
+yrbss%>%
+  filter(!is.na(hours_tv_per_school_day))%>%
+  select(hours_tv_per_school_day)%>%
+  unique()
 ```
 
 ```{r}
