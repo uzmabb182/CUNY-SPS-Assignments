@@ -7,9 +7,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
-
-```
 
 ## R Markdown
 
@@ -253,10 +250,10 @@ t_star<-abs(qt(.05,df=df))
 x_bar<-mean(height)
 sigma<-sd(height)
 SE<-sigma/sqrt(n)
-bot_1<-x_bar-abs(t_star*SE)
+bottom_1<-x_bar-abs(t_star*SE)
 top_1<-x_bar+abs(t_star*SE)
 
-cat("the 90% confidence interval is ",bot_1," to ",top_1)
+cat("the 90% confidence interval is ",bottom_1," to ",top_1)
 ```
 
 ```{r}
@@ -356,10 +353,19 @@ yrbss%>%
   select(hours_tv_per_school_day)%>%
   unique()
 ```
-
+# Exercise 12:
+# Come up with a research question evaluating the relationship between height or weight and sleep.
+# Exploring data:
 
 ```{r}
+yrbss$hours_tv_per_school_day<-as.factor(yrbss$hours_tv_per_school_day)
+yrb_plot<-yrbss%>%
+  filter(!is.na(weight),!is.na(hours_tv_per_school_day))
+p<-ggplot(yrb_plot, aes(x=hours_tv_per_school_day,y=weight))+
+  geom_boxplot()
+p
 
+# looking at the box plots, it looks like there is no major difference between weight and how much TV one watches.
 ```
 
 
