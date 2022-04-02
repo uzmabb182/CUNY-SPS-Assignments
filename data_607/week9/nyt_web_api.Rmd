@@ -24,11 +24,11 @@ library(dplyr)
 # Brief Overview:
 
 ## Task: In this assignment, the task is to choose one of the New York Times APIs, request the API key, 
-##       contruct the URL, perform an API call to fetch the JSON data from the server, and finally 
-##       transform the data into R dataframe.
+## contruct the URL, perform an API call to fetch the JSON data from the server, and finally 
+## transform the data into R dataframe.
 ## Purpose: is to collect the current data information into the dataframe in R for statistcal analysis.
 ## API Selected: In this assignment I am choosing the Books API, which provides information about book 
-                 reviews and The New York Times Best Sellers list.
+## reviews and The New York Times Best Sellers list.
 
 # Access the NYT API Key:
 ```{r}
@@ -36,6 +36,8 @@ apikey <- "04GA736x2mowjM9AOusr0XYdn2t3uVSN"
 ```
 
 # Construct the URL for NYTimes API call
+# The lists/names service returns a list of all the NYT Best Sellers Lists.
+# Using "current" for {date} to get the latest list.
 ```{r}
 url <-  paste0("https://api.nytimes.com/svc/books/v3//lists/current/hardcover-fiction.json?api-key=",apikey)
 
@@ -73,13 +75,31 @@ prettify(json_data)
 ```
 # Converting into a R dataframe
 ```{r}
-books_df <- fromJSON(json_data, flatten = TRUE)
+books_df <- fromJSON(url, flatten = TRUE)
+books_df <- books_df$results
+books_df <- books_df$books
 
 books_df
 ```
+# Check the data type
+```{r}
+str(books_df)
+```
 
 ```{r}
+books_df %>%
+  names
+```
 
+```{r}
+books_df$rank_last_week
+```
+
+# sort dataframe by column
+```{r}
+ 
+books_df <- books_df[order(books_df$rank_last_week),]
+books_df
 ```
 
 
