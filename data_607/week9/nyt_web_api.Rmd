@@ -21,6 +21,14 @@ library(jsonlite)
 library(dplyr)
 ```
 
+# Brief Overview:
+
+## Task: In this assignment, the task is to choose one of the New York Times APIs, request the API key, 
+##       contruct the URL, perform an API call to fetch the JSON data from the server, and finally 
+##       transform the data into R dataframe.
+## Purpose: is to collect the current data information into the dataframe in R for statistcal analysis.
+## API Selected: In this assignment I am choosing the Books API, which provides information about book 
+                 reviews and The New York Times Best Sellers list.
 
 # Access the NYT API Key:
 ```{r}
