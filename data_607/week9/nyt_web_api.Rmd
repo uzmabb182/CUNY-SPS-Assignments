@@ -29,7 +29,7 @@ apikey <- "04GA736x2mowjM9AOusr0XYdn2t3uVSN"
 
 # Construct the URL for NYTimes API call
 ```{r}
-url <- paste0("https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=",apikey)
+url <-  paste0("https://api.nytimes.com/svc/books/v3//lists/current/hardcover-fiction.json?api-key=",apikey)
 
 url
 ```
@@ -45,6 +45,29 @@ response
 
 response$status_code
 
+```
+# Extract headers with headers()
+```{r}
+headers(response)
+```
+# Extract content from the body with $content or content()--use 'text'
+
+```{r}
+data <- content(response, "text")
+```
+
+# Making the data readable using "prettify" function
+
+```{r}
+json_data <- content(response, "text")
+
+prettify(json_data)
+```
+# Converting into a R dataframe
+```{r}
+books_df <- fromJSON(json_data, flatten = TRUE)
+
+books_df
 ```
 
 ```{r}
