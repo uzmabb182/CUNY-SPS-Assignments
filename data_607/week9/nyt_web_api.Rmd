@@ -26,7 +26,7 @@ library(dplyr)
 ## Task: In this assignment, the task is to choose one of the New York Times APIs, request the API key, 
 ## contruct the URL, perform an API call to fetch the JSON data from the server, and finally 
 ## transform the data into R dataframe.
-## Purpose: is to collect the current data information into the dataframe in R for statistcal analysis.
+## Purpose: is to collect the current data information into the dataframe in R for analysis.
 ## API Selected: In this assignment I am choosing the Books API, which provides information about book 
 ## reviews and The New York Times Best Sellers list.
 
@@ -102,4 +102,15 @@ books_df <- books_df[order(books_df$rank_last_week),]
 books_df
 ```
 
+# Filter the rows of our data with the == operator
+```{r}
 
+books_df[books_df$rank_last_week == 1, ]  
+
+```
+
+# Conclusion & Analysis:
+## The New York Times Books Review is a weekl paper in which the current fictiona and non_fiction books are reviewed.
+## The Books API provides information about book reviews and The New York Times Best Sellers lists.
+## According to the data fetched through API call to New York Times, I found that the # 1 "rank_last_week"
+## book is "RUN, ROSE, RUN". The publisher of the book is "Little, Brown" and the primary_isbn13 is "9780759554344"
