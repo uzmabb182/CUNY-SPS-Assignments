@@ -110,7 +110,7 @@ books_df[books_df$rank_last_week == 1, ]
 ```
 
 # Conclusion & Analysis:
-## The New York Times Books Review is a weekl paper in which the current fictiona and non_fiction books are reviewed.
+## The New York Times Books Review is a weekly paper in which the current fictional and non_fictional books are reviewed.
 ## The Books API provides information about book reviews and The New York Times Best Sellers lists.
 ## According to the data fetched through API call to New York Times, I found that the # 1 "rank_last_week"
 ## book is "RUN, ROSE, RUN". The publisher of the book is "Little, Brown" and the primary_isbn13 is "9780759554344"
