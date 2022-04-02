@@ -40,7 +40,7 @@ response <- GET(url)
 
 response
 ```
-# Checking the status of the response
+# Checking the status code of the response
 ```{r}
 
 response$status_code
