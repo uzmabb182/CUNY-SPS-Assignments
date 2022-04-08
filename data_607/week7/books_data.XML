@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <books_data>
-	<book1>
+	<book>
 		<name>R for Data Science</name>
 		<author>Hadley Wickham</author>
 		<publisher>O Reilly</publisher>
 		<isbn-13>978-1491910399</isbn-13>
 		<year>2017</year>
-	</book1>
-	<book2>
+	</book>
+	<book>
 		<name>The Language of SQL</name>
 		<author>Larry Rockoff</author>
 		<publisher>Pearson Education Inc</publisher>
 		<isbn-13>978-0134658254</isbn-13>
 		<year>2016</year>
-	</book2>
-	<book3>
+	</book>
+	<book>
 		<name>R for Everyone</name>
 		<author>Jared P Lander</author>
 		<publisher>Pearson Education Inc</publisher>
 		<isbn-13>978-0134546926</isbn-13>
 		<year>2017</year>
-	</book3>
+	</book>
 </books_data>
