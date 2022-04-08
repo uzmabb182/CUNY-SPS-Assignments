@@ -9,22 +9,34 @@ output: html_document
 library(rvest)
 library(dplyr)
 library(tidyverse)
+library(DT)
 ```
 
 # Reading HTML file
 ```{r }
 # Get working directory path
-path <- getwd()
+github_link <- "https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week7/books_data.html"
 
-path
+github_link
 ```
 
 ```{r}
 # Start by reading a HTML page with read_html():
 
-html_data<- read_html("C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week7/books_data.html")
+html_data<- read_html(github_link)
 
 html_data
+```
+# Converting the HTML data into dataframe
+```{r}
+data <-html_table(html_data)
+html_df <- as.data.frame(data)
+
+html_df
+```
+
+```{r}
+
 ```
 
 # Load the JSON Package
@@ -38,7 +50,9 @@ library("rjson")
 
 ```{r}
 # Give the input file name to the function.
-json_data <- fromJSON(file = "C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week7/books_data.json")
+github_link = "https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week7/books_data.json"
+
+json_data <- fromJSON(file = github_link)
 
 str(json_data)
 ```
@@ -47,16 +61,38 @@ str(json_data)
 ```{r}
 library("XML")
 library("methods")
-library(arsenal)
+
 ```
 
 # the contents of books_data.xml are parsed
 
 ```{r}
 
-xml_data <- xmlParse(file = "C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week7/books_data.xml")
+github_link = "https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week7/books_data.XML"
+
+github_link
+```
+
+```{r}
+library(httr)
+library(XML)
+
+r = GET(github_link)
+xml_data <- xmlTreeParse(r, useInternal=TRUE)
  
 print(xml_data)
+```
+# Now compare the dataframes
+```{r}
+library(arsenal)
+```
+
+```{r}
+
+```
+
+```{r}
+
 ```
 
 
