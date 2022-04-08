@@ -1,0 +1,11 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/882486/17960f5717394fe098164fc019748a8c
+bundleId: https://api.rpubs.com/api/v1/document/882486/17960f5717394fe098164fc019748a8c
+url: http://rpubs.com/uzmabb/882486
+when: 1649459466.10463
+lastSyncTime: 1649459466.10463

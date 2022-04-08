@@ -14,7 +14,7 @@ library(DT)
 
 # Reading HTML file
 ```{r }
-# Get working directory path
+# Get the file link
 github_link <- "https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week7/books_data.html"
 
 github_link
@@ -45,7 +45,7 @@ library(jsonlite)
 # Read a JSON file into a dataframe
 
 ```{r}
-# Give the input file name to the function.
+
 github_link = "https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week7/books_data.json"
 
 

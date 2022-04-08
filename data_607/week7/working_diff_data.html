@@ -391,98 +391,460 @@ pre code {
 ## x dplyr::filter()         masks stats::filter()
 ## x readr::guess_encoding() masks rvest::guess_encoding()
 ## x dplyr::lag()            masks stats::lag()</code></pre>
+<pre class="r"><code>library(DT)</code></pre>
+<pre><code>## Warning: package &#39;DT&#39; was built under R version 4.1.3</code></pre>
 </div>
 <div id="reading-html-file" class="section level1">
 <h1>Reading HTML file</h1>
-<pre class="r"><code># Get working directory path
-path &lt;- getwd()
+<pre class="r"><code># Get the file link
+github_link &lt;- &quot;https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week7/books_data.html&quot;
 
-path</code></pre>
-<pre><code>## [1] &quot;C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week7&quot;</code></pre>
+github_link</code></pre>
+<pre><code>## [1] &quot;https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week7/books_data.html&quot;</code></pre>
 <pre class="r"><code># Start by reading a HTML page with read_html():
 
-html_data&lt;- read_html(&quot;C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week7/books_data.html&quot;)
+html_data&lt;- read_html(github_link)
 
 html_data</code></pre>
 <pre><code>## {html_document}
 ## &lt;html lang=&quot;en&quot;&gt;
 ## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8 ...
-## [2] &lt;body&gt;\r\n    &lt;table border=&quot;1&quot;&gt;\n&lt;thead&gt;\n&lt;tr&gt;\n&lt;th colspan=&quot;4&quot;&gt;Books Da ...</code></pre>
+## [2] &lt;body&gt;\n    &lt;table border=&quot;1&quot;&gt;\n&lt;tr&gt;\n&lt;th&gt;Name&lt;/th&gt;\n                &lt;th&gt; ...</code></pre>
+</div>
+<div id="converting-the-html-data-into-dataframe" class="section level1">
+<h1>Converting the HTML data into dataframe</h1>
+<pre class="r"><code>data &lt;-html_table(html_data)
+html_df &lt;- as.data.frame(data)
+
+html_df</code></pre>
+<pre><code>##                  Name         Author             Publisher        ISBN.13 Year
+## 1  R for Data Science Hadley Wickham              O Reilly 978-1491910399 2017
+## 2 The Language of SQL  Larry Rockoff Pearson Education Inc 978-0134658254 2016
+## 3      R for Everyone Jared P Lander Pearson Education Inc 978-0134546926 2017</code></pre>
 </div>
 <div id="load-the-json-package" class="section level1">
 <h1>Load the JSON Package</h1>
-<pre class="r"><code>library(&quot;rjson&quot;)</code></pre>
-<pre><code>## Warning: package &#39;rjson&#39; was built under R version 4.1.2</code></pre>
+<pre class="r"><code>library(jsonlite)</code></pre>
+<pre><code>## Warning: package &#39;jsonlite&#39; was built under R version 4.1.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;jsonlite&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     flatten</code></pre>
 </div>
-<div id="read-a-json-file" class="section level1">
-<h1>Read a JSON file</h1>
-<pre class="r"><code># Give the input file name to the function.
-json_data &lt;- fromJSON(file = &quot;C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week7/books_data.json&quot;)
+<div id="read-a-json-file-into-a-dataframe" class="section level1">
+<h1>Read a JSON file into a dataframe</h1>
+<pre class="r"><code>github_link = &quot;https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week7/books_data.json&quot;
 
-str(json_data)</code></pre>
-<pre><code>## List of 5
-##  $ :List of 1
-##   ..$ books data: chr &quot;&quot;
-##  $ :List of 5
-##   ..$ books data: chr &quot;R for Data Science&quot;
-##   ..$ name      : chr &quot;Hadley Wickham&quot;
-##   ..$ author    : chr &quot;O Reilly&quot;
-##   ..$ publisher : chr &quot;978-1491910399&quot;
-##   ..$ isbn-13   : chr &quot;2017&quot;
-##  $ :List of 5
-##   ..$ books data: chr &quot;The Language of SQL&quot;
-##   ..$ name      : chr &quot;Larry Rockoff&quot;
-##   ..$ author    : chr &quot;Pearson Education Inc&quot;
-##   ..$ publisher : chr &quot;978-0134658254&quot;
-##   ..$ isbn-13   : chr &quot;2016&quot;
-##  $ :List of 5
-##   ..$ books data: chr &quot;R for Everyone&quot;
-##   ..$ name      : chr &quot;Jared P Lander&quot;
-##   ..$ author    : chr &quot;Pearson Education Inc&quot;
-##   ..$ publisher : chr &quot;978-0134546926&quot;
-##   ..$ isbn-13   : chr &quot;2017&quot;
-##  $ :List of 1
-##   ..$ books data: chr &quot;* Data collected for testing purposes&quot;</code></pre>
+
+
+json_df &lt;- read_json(github_link, simplifyVector = TRUE)
+
+json_df</code></pre>
+<pre><code>##                  name         author             publisher        isbn-13 year
+## 1  R for Data Science Hadley Wickham              O Reilly 978-1491910399 2017
+## 2 The Language of SQL  Larry Rockoff Pearson Education Inc 978-0134658254 2016
+## 3      R for Everyone Jared P Lander Pearson Education Inc 978-0134546926 2017</code></pre>
 </div>
 <div id="loading-the-library-and-other-important-packages" class="section level1">
 <h1>loading the library and other important packages</h1>
 <pre class="r"><code>library(&quot;XML&quot;)</code></pre>
 <pre><code>## Warning: package &#39;XML&#39; was built under R version 4.1.2</code></pre>
-<pre class="r"><code>library(&quot;methods&quot;)
-library(arsenal)</code></pre>
-<pre><code>## Warning: package &#39;arsenal&#39; was built under R version 4.1.3</code></pre>
+<pre class="r"><code>library(&quot;methods&quot;)</code></pre>
 </div>
 <div id="the-contents-of-books_data.xml-are-parsed" class="section level1">
 <h1>the contents of books_data.xml are parsed</h1>
-<pre class="r"><code>xml_data &lt;- xmlParse(file = &quot;C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week7/books_data.xml&quot;)
+<pre class="r"><code>github_link = &quot;https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week7/books_data.XML&quot;
+
+github_link</code></pre>
+<pre><code>## [1] &quot;https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week7/books_data.XML&quot;</code></pre>
+<pre class="r"><code>library(httr)</code></pre>
+<pre><code>## Warning: package &#39;httr&#39; was built under R version 4.1.3</code></pre>
+<pre class="r"><code>library(XML)
+
+r = GET(github_link)
+xml_data &lt;- xmlTreeParse(r, useInternal=TRUE)
  
 print(xml_data)</code></pre>
-<pre><code>## &lt;?xml version=&quot;1.0&quot;?&gt;
-## &lt;catalog&gt;
-##   &lt;book id=&quot;001&quot;&gt;
+<pre><code>## &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+## &lt;books_data&gt;
+##   &lt;book&gt;
+##     &lt;name&gt;R for Data Science&lt;/name&gt;
 ##     &lt;author&gt;Hadley Wickham&lt;/author&gt;
-##     &lt;title&gt;R for Data Science&lt;/title&gt;
-##     &lt;publisher&gt;G.P. Putnam&#39;s Sons&lt;/publisher&gt;
-##     &lt;isbn&gt;0-399-14446-3&lt;/isbn&gt;
+##     &lt;publisher&gt;O Reilly&lt;/publisher&gt;
+##     &lt;isbn-13&gt;978-1491910399&lt;/isbn-13&gt;
+##     &lt;year&gt;2017&lt;/year&gt;
 ##   &lt;/book&gt;
-##   &lt;book id=&quot;002&quot;&gt;
-##     &lt;author&gt;Kenneth Blanchard, Spencer Johnson&lt;/author&gt;
-##     &lt;title&gt;The One Minute Manager&lt;/title&gt;
-##     &lt;price&gt;44.95&lt;/price&gt;
-##     &lt;published_year&gt;1983&lt;/published_year&gt;
-##     &lt;publisher&gt;Berkley Trade&lt;/publisher&gt;
-##     &lt;isbn&gt;0-425-09847-8&lt;/isbn&gt;
+##   &lt;book&gt;
+##     &lt;name&gt;The Language of SQL&lt;/name&gt;
+##     &lt;author&gt;Larry Rockoff&lt;/author&gt;
+##     &lt;publisher&gt;Pearson Education Inc&lt;/publisher&gt;
+##     &lt;isbn-13&gt;978-0134658254&lt;/isbn-13&gt;
+##     &lt;year&gt;2016&lt;/year&gt;
 ##   &lt;/book&gt;
-##   &lt;book id=&quot;003&quot;&gt;
-##     &lt;author&gt;Robert Kiyosaki, Sharon L. Lechter&lt;/author&gt;
-##     &lt;title&gt;Rich Dad Poor Dad&lt;/title&gt;
-##     &lt;price&gt;44.95&lt;/price&gt;
-##     &lt;published_year&gt;2000&lt;/published_year&gt;
-##     &lt;publisher&gt;Warner Books Ed&lt;/publisher&gt;
-##     &lt;isbn&gt;0-446-67745-0&lt;/isbn&gt;
+##   &lt;book&gt;
+##     &lt;name&gt;R for Everyone&lt;/name&gt;
+##     &lt;author&gt;Jared P Lander&lt;/author&gt;
+##     &lt;publisher&gt;Pearson Education Inc&lt;/publisher&gt;
+##     &lt;isbn-13&gt;978-0134546926&lt;/isbn-13&gt;
+##     &lt;year&gt;2017&lt;/year&gt;
 ##   &lt;/book&gt;
-## &lt;/catalog&gt;
+## &lt;/books_data&gt;
 ## </code></pre>
+<pre class="r"><code>xml_df &lt;- xmlToDataFrame(xml_data)
+xml_df</code></pre>
+<pre><code>##                  name         author             publisher        isbn-13 year
+## 1  R for Data Science Hadley Wickham              O Reilly 978-1491910399 2017
+## 2 The Language of SQL  Larry Rockoff Pearson Education Inc 978-0134658254 2016
+## 3      R for Everyone Jared P Lander Pearson Education Inc 978-0134546926 2017</code></pre>
+</div>
+<div id="now-to-compare-these-html-and-json-dataframes-simply-pass-them-to-the-comparedf-function" class="section level1">
+<h1>Now to compare these html and json dataframes, simply pass them to the comparedf() function:</h1>
+</div>
+<div id="please-find-the-conclusion-in-the-very-end-of-the-file" class="section level1">
+<h1>Please find the conclusion in the very end of the file</h1>
+<pre class="r"><code>library(arsenal)</code></pre>
+<pre><code>## Warning: package &#39;arsenal&#39; was built under R version 4.1.3</code></pre>
+<pre class="r"><code>comparedf(html_df, json_df)</code></pre>
+<pre><code>## Compare Object
+## 
+## Function Call: 
+## comparedf(x = html_df, y = json_df)
+## 
+## Shared: 0 non-by variables and 3 observations.
+## Not shared: 10 variables and 0 observations.
+## 
+## Differences found in 0/0 variables compared.
+## 0 variables compared have non-identical attributes.</code></pre>
+</div>
+<div id="use-summary-to-get-a-more-detailed-summary" class="section level1">
+<h1>Use summary() to get a more detailed summary</h1>
+<pre class="r"><code>summary(comparedf(html_df, json_df))</code></pre>
+<pre><code>## 
+## 
+## Table: Summary of data.frames
+## 
+## version   arg        ncol   nrow
+## --------  --------  -----  -----
+## x         html_df       5      3
+## y         json_df       5      3
+## 
+## 
+## 
+## Table: Summary of overall comparison
+## 
+## statistic                                                      value
+## ------------------------------------------------------------  ------
+## Number of by-variables                                             0
+## Number of non-by variables in common                               0
+## Number of variables compared                                       0
+## Number of variables in x but not y                                 5
+## Number of variables in y but not x                                 5
+## Number of variables compared with some values unequal              0
+## Number of variables compared with all values equal                 0
+## Number of observations in common                                   3
+## Number of observations in x but not y                              0
+## Number of observations in y but not x                              0
+## Number of observations with some compared variables unequal        0
+## Number of observations with all compared variables equal           3
+## Number of values unequal                                           0
+## 
+## 
+## 
+## Table: Variables not shared
+## 
+## version   variable     position  class     
+## --------  ----------  ---------  ----------
+## x         Name                1  character 
+## x         Author              2  character 
+## x         Publisher           3  character 
+## x         ISBN.13             4  character 
+## x         Year                5  integer   
+## y         name                1  character 
+## y         author              2  character 
+## y         publisher           3  character 
+## y         isbn-13             4  character 
+## y         year                5  character 
+## 
+## 
+## 
+## Table: Other variables not compared
+## 
+##                                  
+##  --------------------------------
+##  No other variables not compared 
+##  --------------------------------
+## 
+## 
+## 
+## Table: Observations not shared
+## 
+##                             
+##  ---------------------------
+##  No observations not shared 
+##  ---------------------------
+## 
+## 
+## 
+## Table: Differences detected by variable
+## 
+##                                      
+##  ------------------------------------
+##  No differences detected by variable 
+##  ------------------------------------
+## 
+## 
+## 
+## Table: Differences detected
+## 
+##                          
+##  ------------------------
+##  No differences detected 
+##  ------------------------
+## 
+## 
+## 
+## Table: Non-identical attributes
+## 
+##                              
+##  ----------------------------
+##  No non-identical attributes 
+##  ----------------------------</code></pre>
+</div>
+<div id="now-compare-html-and-xml-dataframes" class="section level1">
+<h1>Now compare html and xml dataframes</h1>
+<pre class="r"><code>comparedf(html_df, xml_df)</code></pre>
+<pre><code>## Compare Object
+## 
+## Function Call: 
+## comparedf(x = html_df, y = xml_df)
+## 
+## Shared: 0 non-by variables and 3 observations.
+## Not shared: 10 variables and 0 observations.
+## 
+## Differences found in 0/0 variables compared.
+## 0 variables compared have non-identical attributes.</code></pre>
+</div>
+<div id="use-summary-to-get-a-more-detailed-summary-1" class="section level1">
+<h1>Use summary() to get a more detailed summary</h1>
+<pre class="r"><code>summary(comparedf(html_df, xml_df))</code></pre>
+<pre><code>## 
+## 
+## Table: Summary of data.frames
+## 
+## version   arg        ncol   nrow
+## --------  --------  -----  -----
+## x         html_df       5      3
+## y         xml_df        5      3
+## 
+## 
+## 
+## Table: Summary of overall comparison
+## 
+## statistic                                                      value
+## ------------------------------------------------------------  ------
+## Number of by-variables                                             0
+## Number of non-by variables in common                               0
+## Number of variables compared                                       0
+## Number of variables in x but not y                                 5
+## Number of variables in y but not x                                 5
+## Number of variables compared with some values unequal              0
+## Number of variables compared with all values equal                 0
+## Number of observations in common                                   3
+## Number of observations in x but not y                              0
+## Number of observations in y but not x                              0
+## Number of observations with some compared variables unequal        0
+## Number of observations with all compared variables equal           3
+## Number of values unequal                                           0
+## 
+## 
+## 
+## Table: Variables not shared
+## 
+## version   variable     position  class     
+## --------  ----------  ---------  ----------
+## x         Name                1  character 
+## x         Author              2  character 
+## x         Publisher           3  character 
+## x         ISBN.13             4  character 
+## x         Year                5  integer   
+## y         name                1  character 
+## y         author              2  character 
+## y         publisher           3  character 
+## y         isbn-13             4  character 
+## y         year                5  character 
+## 
+## 
+## 
+## Table: Other variables not compared
+## 
+##                                  
+##  --------------------------------
+##  No other variables not compared 
+##  --------------------------------
+## 
+## 
+## 
+## Table: Observations not shared
+## 
+##                             
+##  ---------------------------
+##  No observations not shared 
+##  ---------------------------
+## 
+## 
+## 
+## Table: Differences detected by variable
+## 
+##                                      
+##  ------------------------------------
+##  No differences detected by variable 
+##  ------------------------------------
+## 
+## 
+## 
+## Table: Differences detected
+## 
+##                          
+##  ------------------------
+##  No differences detected 
+##  ------------------------
+## 
+## 
+## 
+## Table: Non-identical attributes
+## 
+##                              
+##  ----------------------------
+##  No non-identical attributes 
+##  ----------------------------</code></pre>
+</div>
+<div id="now-compare-json-and-xml-dataframes" class="section level1">
+<h1>Now compare json and xml dataframes</h1>
+<pre class="r"><code>comparedf(json_df, xml_df)</code></pre>
+<pre><code>## Compare Object
+## 
+## Function Call: 
+## comparedf(x = json_df, y = xml_df)
+## 
+## Shared: 5 non-by variables and 3 observations.
+## Not shared: 0 variables and 0 observations.
+## 
+## Differences found in 0/5 variables compared.
+## 0 variables compared have non-identical attributes.</code></pre>
+</div>
+<div id="use-summary-to-get-a-more-detailed-summary-2" class="section level1">
+<h1>Use summary() to get a more detailed summary</h1>
+<pre class="r"><code>summary(comparedf(json_df, xml_df))</code></pre>
+<pre><code>## 
+## 
+## Table: Summary of data.frames
+## 
+## version   arg        ncol   nrow
+## --------  --------  -----  -----
+## x         json_df       5      3
+## y         xml_df        5      3
+## 
+## 
+## 
+## Table: Summary of overall comparison
+## 
+## statistic                                                      value
+## ------------------------------------------------------------  ------
+## Number of by-variables                                             0
+## Number of non-by variables in common                               5
+## Number of variables compared                                       5
+## Number of variables in x but not y                                 0
+## Number of variables in y but not x                                 0
+## Number of variables compared with some values unequal              0
+## Number of variables compared with all values equal                 5
+## Number of observations in common                                   3
+## Number of observations in x but not y                              0
+## Number of observations in y but not x                              0
+## Number of observations with some compared variables unequal        0
+## Number of observations with all compared variables equal           3
+## Number of values unequal                                           0
+## 
+## 
+## 
+## Table: Variables not shared
+## 
+##                          
+##  ------------------------
+##  No variables not shared 
+##  ------------------------
+## 
+## 
+## 
+## Table: Other variables not compared
+## 
+##                                  
+##  --------------------------------
+##  No other variables not compared 
+##  --------------------------------
+## 
+## 
+## 
+## Table: Observations not shared
+## 
+##                             
+##  ---------------------------
+##  No observations not shared 
+##  ---------------------------
+## 
+## 
+## 
+## Table: Differences detected by variable
+## 
+## var.x       var.y         n   NAs
+## ----------  ----------  ---  ----
+## name        name          0     0
+## author      author        0     0
+## publisher   publisher     0     0
+## isbn-13     isbn-13       0     0
+## year        year          0     0
+## 
+## 
+## 
+## Table: Differences detected
+## 
+##                          
+##  ------------------------
+##  No differences detected 
+##  ------------------------
+## 
+## 
+## 
+## Table: Non-identical attributes
+## 
+##                              
+##  ----------------------------
+##  No non-identical attributes 
+##  ----------------------------</code></pre>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion:</h1>
+<div id="comparing-all-the-datafarmes-i-conclude-that-all-the-dataframes-are-equal" class="section level3">
+<h3>Comparing all the datafarmes, I conclude that all the dataframes are equal</h3>
+<pre class="r"><code># The data frames from the HTML and XML route are the same
+html_df == xml_df</code></pre>
+<pre><code>##      Name Author Publisher ISBN.13 Year
+## [1,] TRUE   TRUE      TRUE    TRUE TRUE
+## [2,] TRUE   TRUE      TRUE    TRUE TRUE
+## [3,] TRUE   TRUE      TRUE    TRUE TRUE</code></pre>
+<pre class="r"><code># The data frames from the HTML and JSON route are the same
+html_df == json_df</code></pre>
+<pre><code>##      Name Author Publisher ISBN.13 Year
+## [1,] TRUE   TRUE      TRUE    TRUE TRUE
+## [2,] TRUE   TRUE      TRUE    TRUE TRUE
+## [3,] TRUE   TRUE      TRUE    TRUE TRUE</code></pre>
+<pre class="r"><code># The data frames from the HTML and JSON route are the same
+xml_df == json_df</code></pre>
+<pre><code>##      name author publisher isbn-13 year
+## [1,] TRUE   TRUE      TRUE    TRUE TRUE
+## [2,] TRUE   TRUE      TRUE    TRUE TRUE
+## [3,] TRUE   TRUE      TRUE    TRUE TRUE</code></pre>
+</div>
 </div>
 
 
