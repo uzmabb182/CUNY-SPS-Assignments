@@ -35,27 +35,26 @@ html_df <- as.data.frame(data)
 html_df
 ```
 
-```{r}
-
-```
-
 # Load the JSON Package
 
 
 ```{r}
-library("rjson")
+library(jsonlite)
 ```
 
-# Read a JSON file
+# Read a JSON file into a dataframe
 
 ```{r}
 # Give the input file name to the function.
 github_link = "https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week7/books_data.json"
 
-json_data <- fromJSON(file = github_link)
 
-str(json_data)
+
+json_df <- read_json(github_link, simplifyVector = TRUE)
+
+json_df
 ```
+
 # loading the library and other important packages
 
 ```{r}
@@ -82,15 +81,30 @@ xml_data <- xmlTreeParse(r, useInternal=TRUE)
  
 print(xml_data)
 ```
-# Now compare the dataframes
+
+
+```{r}
+
+xml_df <- xmlToDataFrame(xml_data)
+xml_df
+```
+
+# Now to compare these html and json dataframes, simply pass them to the comparedf() function:
 ```{r}
 library(arsenal)
+
 ```
 
 ```{r}
-
+comparedf(html_df, json_df)
 ```
 
+# Use summary() to get a more detailed summary
+
+```{r}
+summary(comparedf(html_df, json_df))
+```
+# Now compare html and xml dataframes
 ```{r}
 
 ```
