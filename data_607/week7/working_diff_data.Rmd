@@ -90,6 +90,8 @@ xml_df
 ```
 
 # Now to compare these html and json dataframes, simply pass them to the comparedf() function:
+
+# Please find the conclusion in the very end of the file
 ```{r}
 library(arsenal)
 
@@ -106,7 +108,40 @@ summary(comparedf(html_df, json_df))
 ```
 # Now compare html and xml dataframes
 ```{r}
+comparedf(html_df, xml_df)
+```
+# Use summary() to get a more detailed summary
 
+```{r}
+summary(comparedf(html_df, xml_df))
+```
+# Now compare json and xml dataframes
+```{r}
+comparedf(json_df, xml_df)
+```
+
+# Use summary() to get a more detailed summary
+
+```{r}
+summary(comparedf(json_df, xml_df))
+```
+# Conclusion:
+
+### Comparing all the datafarmes, I conclude that all the dataframes are equal
+
+```{r}
+# The data frames from the HTML and XML route are the same
+html_df == xml_df
+```
+
+```{r}
+# The data frames from the HTML and JSON route are the same
+html_df == json_df
+```
+
+```{r}
+# The data frames from the HTML and JSON route are the same
+xml_df == json_df
 ```
 
 
