@@ -3,77 +3,79 @@ title: "New york Times Web APIs"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-
-# Loading the Libraries:
+### Loading the Libraries:
 ```{r}
 library(httr)
 library(jsonlite)
 library(dplyr)
 ```
 
-# Brief Overview:
+## Brief Overview:
 
-## Task: In this assignment, the task is to choose one of the New York Times APIs, request the API key, 
-## contruct the URL, perform an API call to fetch the JSON data from the server, and finally 
-## transform the data into R dataframe.
-## Purpose: is to collect the current data information into the dataframe in R for analysis.
-## API Selected: In this assignment I am choosing the Books API, which provides information about book 
-## reviews and The New York Times Best Sellers list.
+Task: In this assignment, the task is to choose one of the New York Times APIs, request the API key, 
+contruct the URL, perform an API call to fetch the JSON data from the server, and finally 
+transform the data into R dataframe.
+Purpose: is to collect the current data information into the dataframe in R for analysis.
+API Selected: In this assignment I am choosing the Books API, which provides information about book 
+reviews and The New York Times Best Sellers list.
 
-# Access the NYT API Key:
+## Access the NYT API Key:
+
 ```{r}
 apikey <- "04GA736x2mowjM9AOusr0XYdn2t3uVSN"
 ```
 
-# Construct the URL for NYTimes API call
-# The lists/names service returns a list of all the NYT Best Sellers Lists.
-# Using "current" for {date} to get the latest list.
+## Construct the URL for NYTimes API call
+### The lists/names service returns a list of all the NYT Best Sellers Lists.
+### Using "current" for {date} to get the latest list.
+
 ```{r}
 url <-  paste0("https://api.nytimes.com/svc/books/v3//lists/current/hardcover-fiction.json?api-key=",apikey)
 
-url
+# url
 ```
 
-# Fetch response:
+## Fetch response:
+
 ```{r}
 response <- GET(url)
 
 response
 ```
-# Checking the status code of the response
+
+## Checking the status code of the response
+
 ```{r}
 
 response$status_code
 
 ```
-# Extract headers with headers()
+
+## Extract headers with headers() function
+
 ```{r}
 headers(response)
 ```
-# Extract content from the body with $content or content()--use 'text'
+
+## Extract content from the body with $content or content()--use 'text'
 
 ```{r}
 data <- content(response, "text")
 ```
 
-# Making the data readable using "prettify" function
+## Making the data readable using "prettify" function
 
 ```{r}
 json_data <- content(response, "text")
 
 prettify(json_data)
 ```
-# Converting into a R dataframe
+
+
+
+## Converting into a R dataframe
+
 ```{r}
 books_df <- fromJSON(url, flatten = TRUE)
 books_df <- books_df$results
@@ -81,10 +83,25 @@ books_df <- books_df$books
 
 books_df
 ```
-# Check the data type
+
+## To reorder the column by position 
+
+```{r}
+
+books_df <- books_df[, c(2, 11, 12, 8, 7, 6, 9)]
+
+books_df
+```
+
+
+
+## Check the data type
+
 ```{r}
 str(books_df)
 ```
+
+## Column names of the dataframe
 
 ```{r}
 books_df %>%
@@ -95,22 +112,25 @@ books_df %>%
 books_df$rank_last_week
 ```
 
-# sort dataframe by column
+## sort dataframe by column
+
 ```{r}
  
 books_df <- books_df[order(books_df$rank_last_week),]
 books_df
 ```
 
-# Filter the rows of our data with the == operator
+## Filter the rows of our data with the == operator
+
 ```{r}
 
 books_df[books_df$rank_last_week == 1, ]  
 
 ```
 
-# Conclusion & Analysis:
-## The New York Times Books Review is a weekly paper in which the current fictional and non_fictional books are reviewed.
-## The Books API provides information about book reviews and The New York Times Best Sellers lists.
-## According to the data fetched through API call to New York Times, I found that the # 1 "rank_last_week"
-## book is "RUN, ROSE, RUN". The publisher of the book is "Little, Brown" and the primary_isbn13 is "9780759554344"
+## Conclusion & Analysis:
+
+The New York Times Books Review is a weekly paper in which the current fictional and non_fictional books are reviewed.
+The Books API provides information about book reviews and The New York Times Best Sellers lists.
+According to the data fetched through API call to New York Times, I found that the # 1 "rank_last_week"
+book is "RUN, ROSE, RUN". The publisher of the book is "Little, Brown" and the primary_isbn13 is "9780759554344"
