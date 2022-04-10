@@ -3,3 +3,38 @@ title: "Week 10 Assignment – Sentiment Analysis"
 output: html_document
 ---
 
+### Downloading and installing tm the package from CRAN
+
+use an R package called “tm”.This package supports all text mining functions like loading data,cleaning data and building a term matrix.
+```{r}
+
+#install.packages("tm")
+
+```
+
+### Import Libraries
+
+```{r}
+library(dplyr)
+library(tidyverse)
+library(textreadr)
+library(tidytext)
+library(tidyr)
+library(ggplot2)
+library(tm)
+```
+
+### Loading Data
+
+Text to be mined is be loaded into R.It comes from text files(.txt).
+To be used in the tm package, it is turned into a “corpus”.
+The tm package use the Corpus() function to create a corpus.
+
+```{r}
+#loading a text file from github
+
+github_link <- "https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week10/weather-tweet.csv"
+
+weather_data<- read.csv(github_link)
+weather_data
+```
