@@ -26,9 +26,9 @@ library(dplyr)
 The tidytext package provides access to several sentiment lexicons. 
 The three general purpose lexions that are based on unigrams, i.e., single words are:
 1. AFINN - lexicon assigns words with a score that runs between -5 and 5,
-           with negative scores indicating negative sentiment and positive scores                      indicating positive sentiment.
-2. nrc - lexicon categorizes words in a binary fashion (“yes”/“no”) into categories of               positive, negative.
-3. bing - lexicon categorizes words in a binary fashion into positive and negative      categories.
+           with negative scores indicating negative sentiment and positive scores indicating positive sentiment.
+2. nrc - lexicon categorizes words in a binary fashion (“yes”/“no”) into categories of positive, negative.
+3. bing - lexicon categorizes words in a binary fashion into positive and negative categories.
 
 The function get_sentiments() allows us to get specific sentiment lexicons with the appropriate measures for each one.
 
@@ -85,6 +85,7 @@ tidy_books %>%
   inner_join(nrc_joy) %>%
   count(word, sort = TRUE)
 ```
+
 There are mostly positive, happy words. 
 
 ### Now, examine how sentiment changes throughout each novel,
@@ -112,7 +113,7 @@ jane_austen_sentiment <- tidy_books %>%
   mutate(sentiment = positive - negative)
 ```
 
-### Visualizationusing ggplot2:
+### Visualization using ggplot2:
 
 Now, plot these sentiment scores across the plot trajectory of each novel,
 by plotting against the index on the x-axis that keeps track of narrative 
