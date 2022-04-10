@@ -132,6 +132,48 @@ tweet_td <- tidy(dtm)
 
 tweet_td
 ```
+### Performing Sentiment Analysis:
+
+Performing sentiment analysis now using the lexicon from Bing Liu and collaborators, which assigns positive/negative labels for each word
+
+```{r}
+ap_sentiments <- ap_td %>%
+  inner_join(get_sentiments("bing"), by = c(term = "word"))
+
+ap_sentiments
+```
+
+We can find the most negative documents:
+
+```{r}
+library(tidyr)
+
+ap_sentiments %>%
+  count(document, sentiment, wt = count) %>%
+  spread(sentiment, n, fill = 0) %>%
+  mutate(sentiment = positive - negative) %>%
+  arrange(sentiment)
+```
+
+### Visualization Analysis
+
+visualize which words contributed to positive and negative sentiment:
+Showing more negative word frequencies than positive
+```{r}
+library(ggplot2)
+
+ap_sentiments %>%
+  count(sentiment, term, wt = count) %>%
+  filter(n >= 5) %>%
+  mutate(n = ifelse(sentiment == "negative", -n, n)) %>%
+  mutate(term = reorder(term, n)) %>%
+  ggplot(aes(term, n, fill = sentiment)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ylab("Contribution to sentiment")
+```
+
+
 
 ```{r}
 
