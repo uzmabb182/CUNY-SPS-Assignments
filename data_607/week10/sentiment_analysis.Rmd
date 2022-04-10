@@ -198,3 +198,47 @@ wordcloud(words = df$word, freq = df$freq, min.freq = 1,
           colors=brewer.pal(8, "Dark2"))
 ```
 
+### Now Trying the package SentimentAnalysis from CRAN
+
+```{r}
+library(SentimentAnalysis)
+```
+
+### Passing the vector for sentiment analysis
+
+```{r}
+
+sentiment <- analyzeSentiment(data_vector)
+
+sentiment
+```
+
+### Extract dictionary-based sentiment according to the QDAP dictionary
+
+```{r}
+sentiment$SentimentQDAP
+```
+
+### View sentiment direction (i.e. positive, neutral and negative)
+
+```{r}
+
+convertToDirection(sentiment$SentimentQDAP)
+
+```
+
+```{r}
+
+df <- data.frame(No=1:5, Sentiment=sentiment)
+df
+
+```
+
+
+```{r}
+convertToBinaryResponse(df)
+
+```
+
+
+
