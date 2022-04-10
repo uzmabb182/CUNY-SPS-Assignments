@@ -366,3 +366,4 @@ normalized for number of words in the chapter.
 3. We analyzed word counts that contribute to each sentiment.
 4. We piped dataframes straight into ggplot2 to show in the visualization.
 5. Text is tokenized into sentences and chapters.
+

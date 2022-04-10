@@ -4,10 +4,17 @@ output: html_document
 ---
 
 
-## Re-create base analysis:
+### Assigned Task:
 
 Re-create and analyze primary code from the textbook.
 Provide citation to text book, using a standard citation syntax like APA or MLA.
+
+
+### Citation to text book, using a standard citation MLA syntax.
+
+### Silge and Robinson - O'Reilly - 2017
+
+---
 
 ### Import Libraries
 
