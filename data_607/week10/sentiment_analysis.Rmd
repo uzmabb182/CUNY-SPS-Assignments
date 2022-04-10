@@ -173,7 +173,20 @@ ap_sentiments %>%
   ylab("Contribution to sentiment")
 ```
 
+### Steps to Create Word Clouds:
 
+Most often, word clouds are used to analyse twitter data or a corpus of text.
+Using the TermDocumentMatrix tdm created above which contains each word in your 
+first column and their frequency in the second column.
+
+```{r}
+library(wordcloud)
+
+matrix <- as.matrix(dtm) 
+words <- sort(rowSums(matrix),decreasing=TRUE) 
+df <- data.frame(word = names(words),freq=words)
+df
+```
 
 ```{r}
 
