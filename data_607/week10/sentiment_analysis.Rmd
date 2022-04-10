@@ -36,7 +36,7 @@ The tm package use the Corpus() function to create a corpus.
 github_link <- "https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week10/weather-tweet.csv"
 
 weather_data<- read.csv(github_link)
-weather_data
+#weather_data
 ```
 
 ### Loading data into a vector
@@ -137,7 +137,7 @@ tweet_td
 Performing sentiment analysis now using the lexicon from Bing Liu and collaborators, which assigns positive/negative labels for each word
 
 ```{r}
-ap_sentiments <- ap_td %>%
+ap_sentiments <- tweet_td %>%
   inner_join(get_sentiments("bing"), by = c(term = "word"))
 
 ap_sentiments
@@ -185,7 +185,7 @@ library(wordcloud)
 matrix <- as.matrix(dtm) 
 words <- sort(rowSums(matrix),decreasing=TRUE) 
 df <- data.frame(word = names(words),freq=words)
-df
+#df
 ```
 
 ### Generate the word cloud:
@@ -210,33 +210,33 @@ library(SentimentAnalysis)
 
 sentiment <- analyzeSentiment(data_vector)
 
-sentiment
+
 ```
 
 ### Extract dictionary-based sentiment according to the QDAP dictionary
 
 ```{r}
-sentiment$SentimentQDAP
+#sentiment$SentimentQDAP
 ```
 
 ### View sentiment direction (i.e. positive, neutral and negative)
 
 ```{r}
 
-convertToDirection(sentiment$SentimentQDAP)
+#convertToDirection(sentiment$SentimentQDAP)
 
 ```
 
 ```{r}
 
 df <- data.frame(No=1:5, Sentiment=sentiment)
-df
+
 
 ```
 
 
 ```{r}
-convertToBinaryResponse(df)
+#convertToBinaryResponse(df)
 
 ```
 

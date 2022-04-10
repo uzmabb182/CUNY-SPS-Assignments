@@ -46,6 +46,12 @@ get_sentiments("nrc")
 
 ### Sentiment analysis with inner join:
 
+```{r}
+library(janeaustenr)
+
+austen_books()
+```
+
 
 ```{r}
 library(janeaustenr)
