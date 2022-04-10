@@ -101,3 +101,39 @@ mydata <- tm_map(mydata, removeNumbers)
 mydata <- tm_map(mydata, removePunctuation)
 ```
 
+### Stemming Process using SnowballC library.
+Stemming is the process of gathering words of similar origin into one word for example “communication”, “communicates”, “communicate”. Stemming helps us increase accuracy in our mined text by removing suffixes and reducing words to their basic forms.
+
+```{r}
+library(SnowballC)
+mydata <- tm_map(mydata, stemDocument)
+mydata
+```
+
+### Creating a term Matrix and finding word frequencies:
+
+The matrix logs the number of times the term appears in our clean data set thus being called a term matrix.
+
+```{r}
+#create a term matrix and store it as dtm
+dtm <- TermDocumentMatrix(mydata)
+dtm
+```
+
+### Analysizing using tidytool
+
+we need to turn it into a one-term-per-document-per-row data frame first.
+```{r}
+
+library(dplyr)
+library(tidytext)
+
+tweet_td <- tidy(dtm)
+
+tweet_td
+```
+
+```{r}
+
+```
+
