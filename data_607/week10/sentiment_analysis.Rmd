@@ -38,3 +38,20 @@ github_link <- "https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments
 weather_data<- read.csv(github_link)
 weather_data
 ```
+
+### Loading data into a vector
+
+```{r}
+data_vector <- weather_data$tweet_text                         
+#data_vector
+```
+
+### Loading data as corpus
+
+```{r}
+#VectorSource() creates character vectors
+mydata <- Corpus(VectorSource(data_vector))
+
+mydata
+```
+
