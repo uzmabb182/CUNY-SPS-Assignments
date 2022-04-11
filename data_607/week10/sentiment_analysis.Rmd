@@ -3,6 +3,10 @@ title: "Week 10 Assignment – Sentiment Analysis"
 output: html_document
 ---
 
+URL for Creating corpus: https://data.world/crowdflower/weather-sentiment
+
+---
+
 ### Downloading and installing tm the package from CRAN
 
 use an R package called “tm”.This package supports all text mining functions like loading data,cleaning data and building a term matrix.
