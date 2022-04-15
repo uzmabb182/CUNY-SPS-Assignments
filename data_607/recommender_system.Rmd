@@ -3,8 +3,9 @@ title: "Week Eleven - Recommender Systems"
 output: html_document
 ---
 
+#### By: Mubashira Qari
 
-### eBay - e-commerce marketplace Recommender system
+### eBay - E-Commerce Marketplace Recommender system:
 
 I am selecting eBay - e-commerce marketplace website for the analysis of recommender system. It has estimated 179 million active buyers, 1.2 billion live listings and tens of millions of sellers across 190 markets. A free recommendation is always appealing to people, especially when it is done at the right shopping impulse of users with intelligent suggestions.
 eBay is an AI driven global marketplace with all kinds of product from all over the world. For an e-commerce business of this large scalability, it needs to have a very efficient recommender system. 
@@ -18,8 +19,8 @@ b. Performing the features extraction from the product reviews.
 c. Filtering of product reviews.
 d. Shipping and delivery estimation.
 e. Payment and fraud detection between two parties’ business dealing.
-f. It uses neural network-based transformer models, like BERT, GPT-2, and GPT-3, for inferring information from text.
-g. It uses a supervised machine learning algorithm, K nearest neighbor (KNN) image classification.
+f. Uses neural network-based transformer models, like BERT, GPT-2, and GPT-3, for inferring information from text.
+g. Uses a supervised machine learning algorithm, K nearest neighbor (KNN) image classification.
 h. For text and summarization, it uses eBert transformer model. Transformer includes two separate mechanisms — an encoder that reads the text input and a decoder that produces a prediction for the task.
 i. Since, eBert is not suitable to use online for inferencing purposes, eBay uses distillation, a way to compress a model and quantization techniques to  improve the accuracy of outcome and speed of the model.
 
