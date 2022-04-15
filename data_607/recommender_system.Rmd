@@ -47,7 +47,7 @@ a.	Encourage Impulse buying:
 
 To encourage customer to buy more than they wanted to, they can promote impulse buying. For impulse buying they should provide not just the similar items but provide the related items on display at the bottom of the page. That display should have a catchy title like, “Items you might be interested in” or “Your items with a great deal pack”. For example: If I am looking for a treadmill, it should give me the picture of treadmill + gym clothes + water bottle + running shoes at the bottom of the page. And should provide on the spot discount for each suggested item and also the discount for the complete suggested pack.
 
-![Related_Items](C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week11/related_items.png)
+![Related_Items](https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/week11/related_items.png)
 
 
 
