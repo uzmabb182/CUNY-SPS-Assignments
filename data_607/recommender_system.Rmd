@@ -6,38 +6,47 @@ output: html_document
 
 ### eBay - e-commerce marketplace Recommender sysytem
 
-A free recommondation is always appealing to people, especially when it is done at the right shopping state of mind and when it is suggested intelligently.eBay is an AI driven global maket place with different kind of product from from all over the world.For an e-commerce business of this large scalibility, it needs to have a very accurate recommender system. What it means is that after training the model, it needs to have a lot of optimization done to predict accurately.
+A free recommondation is always appealing to people, especially when it is done at the right shopping state of mind and when they are intelligent suggestions.
+eBay is an AI driven global market place with all kind of product from from all over the world.For an e-commerce business of this large scalibility, 
+it needs to have a very accurate recommender system. What it means is that after training the model,it needs to have an optimization process that predicts accurately.
+I an selecting eBay - e-commerce marketplace website for the analysis if recommender system. It has estimated 179 million active buyers, 1.2 billion live listings and 
+tens of millions of sellers across 190 markets. 
 
 ### Utilization of Machine Learning Model And AI Techniques:
 
-1. It uses machine learning and AI techniques, for the following tasks: 
+ eBay uses machine learning and AI techniques, for the following tasks: 
 
-2. natural language processing (NLP) for recommending the products to its audience.
+a. natural language processing (NLP) for recommending the products to its audience.
 
-3. Performing the features extraction from the product reviews.
+b. Performing the features extraction from the product reviews.
 
-4. Filtering of product reviews.
+c. Filtering of product reviews.
 
-5. Shipping and delivery estimation.
+d. Shipping and delivery estimation.
 
-6. Payment and fraud detection between two parties business dealing.
+e. Payment and fraud detection between two parties business dealing.
 
-7. It uses neural network-based transformer models, like BERT, GPT-2, and GPT-3, for inferring information from  text.
+f. It uses neural network-based transformer models, like BERT, GPT-2, and GPT-3, for inferring information from  text.
 
-8. It uses a supervised machine learning algorithm, K nearesr neighbor (KNN) image classification.
+g. It uses a supervised machine learning algorithm, K nearesr neighbor (KNN) image classification.
 
-9. For text and summerization, it uses eBert transformer model.Transformer includes two separate mechanisms — an encoder that reads the text input and a decoder that produces a prediction for the task.
+h. For text and summerization, it uses eBert transformer model.Transformer includes two separate mechanisms — an encoder that reads the text input and a 
+   decoder that produces a prediction for the task.
 
-10. Since, eBert is not suitable to use online for inferencing purposes, eBay uses distillation, a way to compress a model and quantization techniques to improve the accuracy of outcome and speed of the model.
+i. Since, eBert is not suitable to use online for inferencing purposes, eBay uses distillation, a way to compress a model and quantization techniques to 
+   improve the accuracy of outcome and speed of the model.
 
 
 ### Scenario Design
 
 1. Who are your target users?
 
-   These target user’s are the sellers, since eBay originally started as an auction site and for buyer’s who either are looking for a very    specific item form all over the world or good deal for an item when they are comparing the price. 
+
+   These target user’s are the sellers, since eBay originally started as an auction site and for buyer’s who either are looking for a very specific 
+   item form all over the world or good deal for an item when they are comparing the price. 
 
 2. What are their key goals?
+
 
 eBay's key goals are as follows:
 
@@ -51,8 +60,11 @@ d. Optimaize pricing by offering best prices and selling on best price by using 
 
 e. It also provides an advertisement engine.
 
+f. Augmented reality to simplify shipping.This feature allows you to place a real-world item into a virtual shipping box.
+
 
 3. How can you help them accomplish those goals?
+
 
 a. improve product presentation and images.
 
@@ -61,10 +73,25 @@ b. More reliable in transaction for buyers and sellers.
 c. The first thing to see advertisement on the landing page is distracting for users.
  
 
-Reverse Engineer
+### Reverse Engineer
+
+eBay performs one of the technique of recommender system, called item-based collaborative filtering.
+
+But I feel that with limited input from the use, and providing output sometimes is not very useful. 
+
+For this reason, they should provide more dropdown list to take users input. for example:
+
+size, color, type, length etc. depending on the product that the user is interested in and then make recommendation.
 
 
 
 
-how to improve the site's recommendation capabilities:
 
+### How to improve the site's recommendation capabilities:
+
+They can improve the site's recommendation capabilities, by giving multiple choice options dropdown lists. This will help the machine learning model to check more 
+conditions and provide better predictions.
+
+Their Landing page can be improved by using better fonts and products images quality.
+
+They should make their site completely fraud free which means more accurate machine learning model capabilities. 
