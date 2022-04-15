@@ -47,6 +47,10 @@ a.	Encourage Impulse buying:
 
 To encourage customer to buy more than they wanted to, they can promote impulse buying. For impulse buying they should provide not just the similar items but provide the related items on display at the bottom of the page. That display should have a catchy title like, “Items you might be interested in” or “Your items with a great deal pack”. For example: If I am looking for a treadmill, it should give me the picture of treadmill + gym clothes + water bottle + running shoes at the bottom of the page. And should provide on the spot discount for each suggested item and also the discount for the complete suggested pack.
 
+![Related_Items](C:/Users/Uzma/CUNY-SPS-Assignments/data_607/week11/related_items.png)
+
+
+
 b.	More Multimedia should be included to attract Customers:
 
 When a customer selects an item, they should provide a video on how to use the product along with the different angle images. My personal experience is, that video always helps me to buy with confidence and results are always what I expected after watching the video. Once they build this kind of customer satisfaction through promotional videos, they will see more returning customers to their site with less item returning.
@@ -60,6 +64,8 @@ a.	They should provide the customer rating for each of the product on the list, 
 b.	Also, when they click on the rating, should be provided with top five customer’s positive comments. This also brings customers back to the site to check out about the product quality.
 
 c.	Product specification is also one of the key elements that should be included when customer click the item. Specification means, the measurements of size, and the weight of the product.  If I am looking for a mini treadmill with a weight that I can lift easily, this piece of information is very useful for me.
+
+d. And lastly, the site should provide the display list of items that I last purchased. Many times, it helps so much when I want to reshop the same item. This is another insentive to revisit the same site.
 
 ### Resources:
 https://www.enterpriseai.news/2021/09/15/heres-how-ebay-is-using-optimization-techniques-to-scale-ai-for-its-recommendation-systems/
