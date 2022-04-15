@@ -4,7 +4,7 @@ output: html_document
 ---
 
 
-### eBay Recommender sysytem
+### eBay - e-commerce marketplace Recommender sysytem
 
 A free recommondation is always appealing to people, especially when it is done at the right shopping state of mind and when it is suggested intelligently.eBay is an AI driven global maket place with different kind of product from from all over the world.For an e-commerce business of this large scalibility, it needs to have a very accurate recommender system. What it means is that after training the model, it needs to have a lot of optimization done to predict accurately.
 
@@ -35,21 +35,36 @@ A free recommondation is always appealing to people, especially when it is done 
 
 1. Who are your target users?
 
-These target user’s are the sellers, since eBay originally started as an auction site and for buyer’s who either are looking for a very specific item form all over the world or good deal for an item when they are comparing the price. 
+   These target user’s are the sellers, since eBay originally started as an auction site and for buyer’s who either are looking for a very    specific item form all over the world or good deal for an item when they are comparing the price. 
 
 2. What are their key goals?
 
 eBay's key goals are as follows:
 
-a. Provide best experience to their buysers and sellers. 
+a. Provide best experience to their buysers and sellers.
+
+b. Bring best results from the searches.
+
+c. Provide a platform for service.
+
+d. Optimaize pricing by offering best prices and selling on best price by using machine learning algorithms.
+
+e. It also provides an advertisement engine.
 
 
 3. How can you help them accomplish those goals?
 
-eBay’s returns the top related items with filter’s and sorting options to aid the user as well as a side panel of related items available for browsing.
+a. improve product presentation and images.
+
+b. More reliable in transaction for buyers and sellers.
+
+c. The first thing to see advertisement on the landing page is distracting for users.
+ 
 
 Reverse Engineer
 
 
 
-how to improve the site's recommendation capabilities
+
+how to improve the site's recommendation capabilities:
+
