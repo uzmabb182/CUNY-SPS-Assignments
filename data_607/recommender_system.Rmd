@@ -4,97 +4,63 @@ output: html_document
 ---
 
 
-### eBay - e-commerce marketplace Recommender sysytem
+### eBay - e-commerce marketplace Recommender system
 
-A free recommondation is always appealing to people, especially when it is done at the right shopping state of mind and when they are intelligent suggestions.
-eBay is an AI driven global market place with all kind of product from from all over the world.For an e-commerce business of this large scalibility, 
-it needs to have a very accurate recommender system. What it means is that after training the model,it needs to have an optimization process that predicts accurately.
-I an selecting eBay - e-commerce marketplace website for the analysis if recommender system. It has estimated 179 million active buyers, 1.2 billion live listings and 
-tens of millions of sellers across 190 markets. 
+I am selecting eBay - e-commerce marketplace website for the analysis of recommender system. It has estimated 179 million active buyers, 1.2 billion live listings and tens of millions of sellers across 190 markets. A free recommendation is always appealing to people, especially when it is done at the right shopping impulse of users with intelligent suggestions.
+eBay is an AI driven global marketplace with all kinds of product from all over the world. For an e-commerce business of this large scalability, it needs to have a very efficient recommender system. 
 
-### Utilization of Machine Learning Model And AI Techniques:
+### Utilization of Machine Learning Model and AI Techniques:
 
  eBay uses machine learning and AI techniques, for the following tasks: 
-
-a. natural language processing (NLP) for recommending the products to its audience.
-
+ 
+a. Natural language processing (NLP) for recommending the products to its audience.
 b. Performing the features extraction from the product reviews.
-
 c. Filtering of product reviews.
-
 d. Shipping and delivery estimation.
-
-e. Payment and fraud detection between two parties business dealing.
-
-f. It uses neural network-based transformer models, like BERT, GPT-2, and GPT-3, for inferring information from  text.
-
-g. It uses a supervised machine learning algorithm, K nearesr neighbor (KNN) image classification.
-
-h. For text and summerization, it uses eBert transformer model.Transformer includes two separate mechanisms — an encoder that reads the text input and a 
-   decoder that produces a prediction for the task.
-
-i. Since, eBert is not suitable to use online for inferencing purposes, eBay uses distillation, a way to compress a model and quantization techniques to 
-   improve the accuracy of outcome and speed of the model.
+e. Payment and fraud detection between two parties’ business dealing.
+f. It uses neural network-based transformer models, like BERT, GPT-2, and GPT-3, for inferring information from text.
+g. It uses a supervised machine learning algorithm, K nearest neighbor (KNN) image classification.
+h. For text and summarization, it uses eBert transformer model. Transformer includes two separate mechanisms — an encoder that reads the text input and a decoder that produces a prediction for the task.
+i. Since, eBert is not suitable to use online for inferencing purposes, eBay uses distillation, a way to compress a model and quantization techniques to  improve the accuracy of outcome and speed of the model.
 
 
-### Scenario Design
+### Scenario Design:
+
+When I apply reverse engineering to the eBay site, I come up with the following scenario design answers:
 
 #### 1. Who are your target users?
 
-
-   These target user’s are the sellers, since eBay originally started as an auction site and for buyer’s who either are looking for a very specific 
-   item form all over the world or good deal for an item when they are comparing the price. 
-
+ Their target users are the buyers who are looking for a very specific item from all over the world or deals for a better price. 
+ 
 #### 2. What are their key goals?
 
-
-   eBay's key goals are as follows:
-
-a. Provide best experience to their buysers and sellers.
-
-b. Bring best results from the searches.
-
-c. Provide a platform for service.
-
-d. Optimaize pricing by offering best prices and selling on best price by using machine learning algorithms.
-
-e. It also provides an advertisement engine.
-
-f. Augmented reality to simplify shipping.This feature allows you to place a real-world item into a virtual shipping box.
-
+   eBay's key goals are to maximize the sells and minimize the returns with customer satisfaction guaranteed. I can further breakdown into following points:
+   
+a.	Encourage customer to buy more than they wanted. 
+b.	Bring enhanced results from their searches. 
+c.	Provide best possible deals for the items.
+d.	To provide best customer satisfaction after their purchases.
 
 #### 3. How can you help them accomplish those goals?
 
+a.	Encourage Impulse buying:
 
-a. improve product presentation and images.
+To encourage customer to buy more than they wanted to, they can promote impulse buying. For impulse buying they should provide not just the similar items but provide the related items on display at the bottom of the page. That display should have a catchy title like, “Items you might be interested in” or “Your items with a great deal pack”. For example: If I am looking for a treadmill, it should give me the picture of treadmill + gym clothes + water bottle + running shoes at the bottom of the page. And should provide on the spot discount for each suggested item and also the discount for the complete suggested pack.
 
-b. More reliable in transaction for buyers and sellers.
+b.	More Multimedia should be included to attract Customers:
 
-c. The first thing to see advertisement on the landing page is distracting for users.
- 
-
-### Reverse Engineer
-
-eBay uses one of the technique of recommender system, called item-based collaborative filtering.
-
-
-
-
-
-
+When a customer selects an item, they should provide a video on how to use the product along with the different angle images. My personal experience is, that video always helps me to buy with confidence and results are always what I expected after watching the video. Once they build this kind of customer satisfaction through promotional videos, they will see more returning customers to their site with less item returning.
 
 ### How to improve the site's recommendation capabilities:
 
-They can improve the site's recommendation capabilities, by giving multiple choice options dropdown lists. This will help the machine learning model to check more 
-conditions and provide better predictions for recommendation, like size, color, type, length entries etc. depending on the product that the user is interested in and then make recommendation.
+To improve the eBay site’s recommendation capabilities, below are some suggestions:
 
-Their Landing page can be improved by using better fonts and products images quality.
+a.	They should provide the customer rating for each of the product on the list, and not just the top-rated item. This helps the customer during decision making. Because the customer is not only considering the price but also looking for the product quality during shopping. Each product’s rating helps them analyze the quality of the product.
 
-They should make their site completely fraud free which means more accurate machine learning model capabilities. 
+b.	Also, when they click on the rating, should be provided with top five customer’s positive comments. This also brings customers back to the site to check out about the product quality.
 
+c.	Product specification is also one of the key elements that should be included when customer click the item. Specification means, the measurements of size, and the weight of the product.  If I am looking for a mini treadmill with a weight that I can lift easily, this piece of information is very useful for me.
 
 ### Resources:
-
 https://www.enterpriseai.news/2021/09/15/heres-how-ebay-is-using-optimization-techniques-to-scale-ai-for-its-recommendation-systems/
-
 https://www.forbes.com/sites/bernardmarr/2019/04/26/the-amazing-ways-ebay-is-using-artificial-intelligence-to-boost-business-success/?sh=6facedb62c2e
