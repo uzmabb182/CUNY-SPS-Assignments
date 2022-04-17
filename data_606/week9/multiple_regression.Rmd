@@ -3,24 +3,94 @@ title: "Week 9 - Multiple Linear Regression"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+### Load Packages:
+
+```{r}
+library(tidyverse)
+library(openintro)
+library(GGally)
 ```
 
-## R Markdown
+### The Data
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+The data were gathered from end of semester student evaluations for a large sample of professors from the University of Texas at Austin. In addition, six students rated the professors’ physical appearance. The result is a data frame where each row contains a different course and columns represent variables about the courses and professors. It’s called evals.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+```{r}
+view(evals)
+```
+
+
+```{r}
+glimpse(evals)
+```
+
+### Exploring the data:
+
+#### Exercise 1:
+
+Is this an observational study or an experiment? The original research question posed in the paper is whether beauty leads directly to the differences in course evaluations. Given the study design, is it possible to answer this question as it is phrased? If not, rephrase the question.
+
+Yes this is an observational study since there is no experiment designed to collect data. And yes, it is possible to answerthe question that there may be correlation between the two variables and not the causation.
+
+#### Exercise 2:
+
+Describe the distribution of score. Is the distribution skewed? What does that tell you about how students rate courses? Is this what you expected to see? Why, or why not?
+
+The distribution is left skewed, which means that the mean is less than the median.There are more positive than negative evaluation for the teachers.Yes this is what I would expect, because there are mostly fewer teachers whose rating goes negative.
+
+```{r}
+hist(evals$score)
+```
+
+#### Exercise 3:
+
+Excluding score, select two other variables and describe their relationship with each other using an appropriate visualization.
+
+The data points are scattered all over, not a relationship between the teacher’s age and beauty score.
+
+```{r}
+#boxplot(evals$bty_avg ~ evals$age)
+
+#fit simple linear regression model
+model <- lm(evals$age ~ evals$bty_avg, data = evals)
+
+#create scatterplot of data
+plot(evals$bty_avg, evals$age)
+
+#add fitted regression line
+abline(model)
+```
+
+### Simple linear regression:
+The fundamental phenomenon suggested by the study is that better looking teachers are evaluated more favorably. Let’s create a scatterplot to see if this appears to be the case:
+
+```{r}
+ggplot(data = evals, aes(x = bty_avg, y = score)) +
+  geom_point()
+```
+
+Before we draw conclusions about the trend, compare the number of observations in the data frame with the approximate number of points on the scatterplot. Is anything awry?
+There seem to be more observations than the approximate number of points on the scatterplot.
+
+```{r}
+nrow(evals)
+```
+
+###Exercise 4: 
+
+Replot the scatterplot, but this time use geom_jitter as your layer. What was misleading about the initial scatterplot?
+
+It is not showing the relationship between beauty average and score for the teacher because of overlapping scores
+```{r}
+ggplot(data = evals, aes(x = bty_avg, y = score)) +
+  geom_jitter()
+```
 
 ```{r}
 
 ```
 
-
-
 ```{r}
 
 ```
-
 
