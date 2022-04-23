@@ -5,8 +5,66 @@ date: "April 22, 2022"
 output: html_document
 ---
 
+## Readr -- Reading Files
+
+### The first package of TidyVerse to read the file is "Readr" It is a fast way to read rectangular data from delimited files, such as comma-separated values (CSV) and tab-separated values (TSV).
+
+###The easiest way to get readr is to install the whole tidyverse:
+
+readr supports the following file formats with these read_*() functions:
+
+read_csv(): comma-separated values (CSV) files
+read_tsv(): tab-separated values (TSV) files
+read_delim(): delimited files (CSV and TSV are important special cases)
+read_fwf(): fixed-width files
+read_table(): whitespace-separated files
+read_log(): web log files
+
 ```{r}
 library(tidyverse)
+library(readr)
+library(dplyr)
+```
+
+### Fetching the files from relational dataset on GitHub
+```{r}
+college_major <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/majors-list.csv", na="")
+
+view(college_major)
+```
+
+### Deplyr -- Rename Columns
+
+For rename(): <tidy-select> Use new_name = old_name to rename selected variables.
+
+```{r}
+college_major <- as_tibble(college_major) # so it prints a little nicer
+```
+
+
+```{r}
+
+college_major <- rename(college_major, Major_Id = FOD1P)
+
+head(college_major)
+```
+
+
+
+```{r}
+all_ages <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/all-ages.csv", na="")
+
+view(all_ages)
+```
+### To generate query
+
+```{r}
+summary <- all_ages %>% 
+  group_by(Major_category) %>% 
+  summarise(Employed = mean(Employed, na.rm = TRUE)) %>% 
+  arrange(desc(Employed))
+
+summary
 ```
 
 
@@ -16,14 +74,45 @@ library(tidyverse)
 
 
 ```{r}
+grad_students <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/grad-students.csv", na="")
 
+view(grad_students)
 ```
 
+
+```{r}
+women_stem <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/grad-students.csv", na="")
+
+view(women_stem)
+```
+
+```{r}
+recent_grads <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/recent-grads.csv", na="")
+
+view(recent_grads)
+```
+
+###
 
 ```{r}
 
 ```
 
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
 
 ```{r}
 
