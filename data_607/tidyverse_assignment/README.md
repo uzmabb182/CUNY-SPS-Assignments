@@ -55,8 +55,15 @@ https://github.com/aelsaeyed/SPRING2022TIDYVERSE/blob/main/Al'sDyplr.Rmd
 * dplyr – to rename columns, mutating joins, summarise function 
 * magrittr - pipe operator to replicate SQL query
 * ggplot2 - for visualizing
+* Quantile function
 
-### Mubashira_Qari_ Extends_MoiyaJosephs_ggplot.Rmd for Extend an Existing Example.
+### Mubashira_Qari_ Extends_MoiyaJosephs_ggplot.Rmd for Extend an Existing Example. Below are the packages used:
+
+* Package Dplyr - for manipulating datasets
+* Package tidyr - for data tidying
+* Package ggplot2 - for visualizing
+
+
 
 
  
