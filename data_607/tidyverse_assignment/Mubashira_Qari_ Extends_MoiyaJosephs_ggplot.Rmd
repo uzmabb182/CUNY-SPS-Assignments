@@ -1,0 +1,173 @@
+---
+title: "Tidyverse CREATE"
+author: "Moiya Josephs"
+date: "4/9/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(tidyverse)
+```
+
+# GGPLOT 
+
+Is a package in `ggplot` that allows us to visualize our data and make it clearer when presenting our findings. In this document I plan to show how to use ggplot features that are not just bar plots or line charts.
+The data I will be using to demo the different features of ggplot is one that rates Ramen. It allows me to show how ggplot graphs discrete and continuous variables.
+
+# Read Data
+
+```{r}
+ramen_ratings <- read.csv("https://raw.githubusercontent.com/moiyajosephs/Data607-Project2/main/ramen-ratings.csv")
+```
+
+## Plot Ramen
+
+### Geom Count 
+
+When plotting two discrete variables `geom_count` is recommended. `Geom_Count` is a variation of `geom_point` and maps the frequency for each observation. It has a legend for the dots, the larger the dot the more of that value there is in the data.
+
+```{r}
+ggplot(ramen_ratings, aes(Brand, Style, color = Style)) + geom_count() + theme(axis.text.x = element_blank() )
+```
+
+
+## Geom Col 
+
+`Geom col` is identical to geom_bar since it shows bar charts. The difference with `geom_col` is that it allows you to plot the bars relative to the data instead of the number of types x occurs like `geom_bar`.
+
+Below I am able to plot the brand of ramen and the ratings they received.
+
+```{r}
+ramen_ratings$Stars <- as.numeric(ramen_ratings$Stars)
+
+ggplot(head(ramen_ratings,10), aes(Brand, Stars, fill = Style) ) + geom_col() +  theme(axis.text.x = element_text(angle = -30, vjust = 1, hjust = 0))
+
+```
+
+### Geom Map
+
+This is the most interesting of the data and if data has regions specified, you can map where each point is. The function `map_data` allows you to get the longitude and latitude of a region specified, like state, or country. The ramen data is international, luckily we can also set `map_data` to world, so it collects all the coordinates of countries in the world.
+```{r}
+map <- map_data("world")
+```
+This data is very large, however, and we do not need all the coordinates for the same country. So I used the `distinct` function in order to get unique row values for each country in `map_data` and call it `map_regions.set`.
+```{r}
+map.regions.set <- distinct(map, region, .keep_all = TRUE)
+```
+
+Now that I have the unique regions, I can left join it with the map data where the country equals the region. That way we have the ramen information from the original dataset, joined with the coordinates for the region of each plot,
+
+```{r}
+ramen.map <- left_join(ramen_ratings, map.regions.set, by = c("Country"="region"))
+
+ggplot() +
+  geom_map(
+    data = map, map = map,
+    aes(long, lat, map_id = region),
+    color = "white", fill = "lightgray", size = 0.1
+  ) +
+  geom_point(
+    data = ramen.map,
+    aes(long, lat, color = Style),
+    alpha = 0.7
+  )
+```
+
+The map above shows where the style of ramens are located around the world. At a glance, a person could see that pack is a popular ramen style.
+
+
+
+# Conclusion
+
+`Ggplot` is a very powerful library within tidyverse that allows you to make various visualizations based on your data. With visualizations, data scientists can present any key findings in an easy to understand way.
+
+
+# References
+
+1. `r citation("tidyverse")`
+
+2. https://www.kaggle.com/datasets/residentmario/ramen-ratings?resource=download
+
+3. https://rdrr.io/cran/ggplot2/man/map_data.html
+
+4. https://datavizpyr.com/how-to-make-world-map-with-ggplot2-in-r/
+
+
+### TidyVerse EXTEND Assignment:
+
+```{r}
+head(ramen_ratings)
+```
+
+### Package Dplyr - for manipulating datasets
+
+#### Change Name of Columns in R with dplyr rename()
+
+```{r}
+ramen_ratings <- ramen_ratings %>%
+  rename(Reviews = Review..,
+         Ratings = Stars,
+         Top_Ten = Top.Ten
+         )
+
+head(ramen_ratings)
+```
+
+### Selecting the columns 'Brand' and 'Ratings' and all rows
+
+```{r}
+summary <- ramen_ratings %>% 
+  group_by(Brand) %>% 
+  summarise(Ratings = as.integer(mean(Ratings, na.rm = TRUE))) %>% 
+  arrange(desc(Ratings)) %>% filter(Ratings == 5)
+
+summary
+```
+
+Package ggplot2 - for Visualization
+
+####  Using the 'ggplot' for visualizing Ratings=5
+
+```{r}
+ggplot(summary, aes(x = Ratings, y = Brand, fill = Ratings)) +
+  geom_col(position = "dodge")
+```
+
+```{r}
+# glimpse(ramen_ratings)
+```
+
+### Extracting the 'Top_Ten' column
+
+```{r}
+top_ten_df <- filter(ramen_ratings, Top_Ten != "")
+
+head(top_ten_df)
+```
+
+### Package tidyr:
+
+#### Separate a character column into multiple columns with a regular expression or numeric locations
+
+#### Split Top_Ten column into two: Year and Ranking
+
+
+```{r}
+
+top_ten_df <- top_ten_df %>% separate(Top_Ten, c("Year", "Ranking"))  
+  
+
+head(top_ten_df)
+```
+
+```{r}
+filter(top_ten_df, Ranking == 10)
+```
+####  Using the 'ggplot' for visualizing Ratings=5
+
+```{r}
+ggplot(top_ten_df, aes(x = Ranking, y = Brand, fill = Ranking)) +
+  geom_col(position = "dodge")
+```

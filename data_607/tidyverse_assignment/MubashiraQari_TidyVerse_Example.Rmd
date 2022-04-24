@@ -1,15 +1,19 @@
 ---
-title: 'tidyverse: Worked Example'
+title: 'TidyVerse: Worked Example'
 author: "Mubashira Qari"
 date: "April 22, 2022"
 output: html_document
 ---
 
-## Readr -- Reading Files
+### Objective: Create an Example:  
+I am using couple of TidyVerse packages here, and college 'major_list' dataset from fivethirtyeight.com , and creating a programming sample “vignette” that demonstrates how to use one or more of the capabilities of the selected TidyVerse package with my selected dataset.
 
-### The first package of TidyVerse to read the file is "Readr" It is a fast way to read rectangular data from delimited files, such as comma-separated values (CSV) and tab-separated values (TSV).
 
-###The easiest way to get readr is to install the whole tidyverse:
+### Readr -- Reading Files
+
+The first package of TidyVerse to read the file is "Readr" It is a fast way to read rectangular data from delimited files, such as comma-separated values (CSV) and tab-separated values (TSV).
+
+### The easiest way to get readr is to install the whole tidyverse:
 
 readr supports the following file formats with these read_*() functions:
 
@@ -26,14 +30,15 @@ library(readr)
 library(dplyr)
 ```
 
-### Fetching the files from relational dataset on GitHub
+### Fetching the majors-list dataset from the relational dataset on GitHub
+
 ```{r}
 college_major <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/majors-list.csv", na="")
 
 head(college_major)
 ```
 
-### Deplyr -- Rename Columns
+### Using package 'Deplyr' -- to Rename Columns
 
 For rename(): <tidy-select> Use new_name = old_name to rename selected variables.
 
@@ -49,14 +54,14 @@ college_major <- rename(college_major, Major_Id = FOD1P)
 head(college_major)
 ```
 
-
+### Reading 'all-ages' dataset
 
 ```{r}
 all_ages <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/all-ages.csv", na="")
 
 head(all_ages)
 ```
-### To generate query from 
+### This 'pipe operator' replicate SQL query 
 
 ```{r}
 summary <- all_ages %>% 
@@ -66,19 +71,22 @@ summary <- all_ages %>%
 
 summary
 ```
-### Using the ggplot for visualizing which category has most most employed
+
+### Using the 'ggplot' for visualizing which category has most most employed
 
 ```{r}
 ggplot(summary, aes(x = Employed, y = Major_category, fill = Major_category)) +
   geom_col(position = "dodge")
 ```
 
+### Reading the 'grad-students' dataset
 
 ```{r}
 grad_students <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/grad-students.csv", na="")
 
 head(grad_students)
 ```
+
 ### Mutating joins:
 
 Mutating joins allow you to combine variables from multiple tables.
@@ -88,6 +96,7 @@ merge_df <- all_ages %>% left_join(grad_students, by = "Major_code")
 
 merge_df
 ```
+
 ### Remove multiple Column in R using dplyr (by name and index) -- TidyVerse
 
 ```{r}
@@ -96,6 +105,7 @@ merge_df <- select(merge_df, -c(Major_category.y, Major.y))
 
 head(merge_df)
 ```
+
 ### Change Name of Columns in R with dplyr rename()
 
 ```{r}
@@ -107,12 +117,15 @@ merge_df <- merge_df %>%
 head(merge_df)
 ```
 
+### Reading the 'grad-students' dataset
 
 ```{r}
 women_stem <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/grad-students.csv", na="")
 
 head(women_stem)
 ```
+
+### Reading the 'recent-grads' dataset
 
 ```{r}
 recent_grads <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/recent-grads.csv", na="")
@@ -153,7 +166,8 @@ merge_df %>%
   group_by(Major_category) %>% 
   summarise(x = quantile(Grad_unemployment_rate, c(0.25, 0.5, 0.75)), q = c(0.25, 0.5, 0.75))
 ```
-### Summerizing the merge_df on Grad_unemployed
+
+### Summerizing the merge_df using 'summarise' function on 'Grad_unemployed' column
 
 ```{r}
 summary1 <- merge_df %>% 
@@ -168,7 +182,7 @@ summary1
 
 ```{r}
 ggplot(data = summary1) +
-  geom_count(mapping = aes(x = Grad_unemployed, y = Major_category))
+  geom_count(mapping = aes(x = Grad_unemployed, y = Major_category,  color = Major_category) )
 ```
 
 
