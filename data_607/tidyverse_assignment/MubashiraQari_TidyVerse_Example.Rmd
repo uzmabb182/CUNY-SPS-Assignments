@@ -163,7 +163,9 @@ summary1 <- merge_df %>%
 
 summary1
 ```
-# Visualizing the trend of Grad_unemployed vs Major_category
+
+### Visualizing the trend of Grad_unemployed vs Major_category
+
 ```{r}
 ggplot(data = summary1) +
   geom_count(mapping = aes(x = Grad_unemployed, y = Major_category))
