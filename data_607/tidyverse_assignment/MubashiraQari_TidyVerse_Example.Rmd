@@ -30,7 +30,7 @@ library(dplyr)
 ```{r}
 college_major <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/majors-list.csv", na="")
 
-view(college_major)
+head(college_major)
 ```
 
 ### Deplyr -- Rename Columns
@@ -54,9 +54,9 @@ head(college_major)
 ```{r}
 all_ages <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/all-ages.csv", na="")
 
-view(all_ages)
+head(all_ages)
 ```
-### To generate query
+### To generate query from 
 
 ```{r}
 summary <- all_ages %>% 
@@ -66,55 +66,107 @@ summary <- all_ages %>%
 
 summary
 ```
-
+### Using the ggplot for visualizing which category has most most employed
 
 ```{r}
-
+ggplot(summary, aes(x = Employed, y = Major_category, fill = Major_category)) +
+  geom_col(position = "dodge")
 ```
 
 
 ```{r}
 grad_students <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/grad-students.csv", na="")
 
-view(grad_students)
+head(grad_students)
+```
+### Mutating joins:
+
+Mutating joins allow you to combine variables from multiple tables.
+
+```{r}
+merge_df <- all_ages %>% left_join(grad_students, by = "Major_code")
+
+merge_df
+```
+### Remove multiple Column in R using dplyr (by name and index) -- TidyVerse
+
+```{r}
+
+merge_df <- select(merge_df, -c(Major_category.y, Major.y))
+
+head(merge_df)
+```
+### Change Name of Columns in R with dplyr rename()
+
+```{r}
+merge_df <- merge_df %>%
+  rename(Major_category = Major_category.x,
+         Major = Major.x
+         )
+
+head(merge_df)
 ```
 
 
 ```{r}
 women_stem <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/grad-students.csv", na="")
 
-view(women_stem)
+head(women_stem)
 ```
 
 ```{r}
 recent_grads <- read_csv("https://raw.githubusercontent.com/uzmabb182/CUNY-SPS-Assignments/main/data_607/tidyverse_assignment/recent-grads.csv", na="")
 
-view(recent_grads)
+head(recent_grads)
 ```
 
-###
+### Merging merge_df and recent_grads
+
+```{r}
+merge_df <- merge_df %>% left_join(recent_grads, by = "Major_code")
+
+merge_df
+```
+
+### Remove multiple Column in R using dplyr (by name and index) -- TidyVerse
 
 ```{r}
 
+merge_df <- select(merge_df, -c(Major_category.y, Major.y))
+
+merge_df
+
 ```
+
+### To remove a common suffix from column names in an R data frame
 
 ```{r}
-
+colnames(merge_df)<-gsub(".x","",colnames(merge_df))
+merge_df
 ```
+### Quantiles 
+
+To demonstrate this new flexibility in a more useful situation, let’s take a look at quantile(). quantile() was hard to use previously because it returns multiple values. Now it’s straightforward
 
 ```{r}
-
+merge_df %>% 
+  group_by(Major_category) %>% 
+  summarise(x = quantile(Grad_unemployment_rate, c(0.25, 0.5, 0.75)), q = c(0.25, 0.5, 0.75))
 ```
+### Summerizing the merge_df on Grad_unemployed
 
 ```{r}
+summary1 <- merge_df %>% 
+  group_by(Major_category) %>% 
+  summarise(Grad_unemployed = mean(Grad_unemployed, na.rm = TRUE)) %>% 
+  arrange(desc(Grad_unemployed))
 
+summary1
 ```
-
+# Visualizing the trend of Grad_unemployed vs Major_category
 ```{r}
-
+ggplot(data = summary1) +
+  geom_count(mapping = aes(x = Grad_unemployed, y = Major_category))
 ```
 
-```{r}
-
-```
 
