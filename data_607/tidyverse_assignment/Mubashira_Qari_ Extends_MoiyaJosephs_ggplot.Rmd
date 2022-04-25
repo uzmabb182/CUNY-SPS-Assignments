@@ -165,7 +165,7 @@ head(top_ten_df)
 ```{r}
 filter(top_ten_df, Ranking == 10)
 ```
-####  Using the 'ggplot' for visualizing Ratings=5
+####  Using the 'ggplot' for visualizing Ranking
 
 ```{r}
 ggplot(top_ten_df, aes(x = Ranking, y = Brand, fill = Ranking)) +
